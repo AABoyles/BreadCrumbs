@@ -9,75 +9,146 @@
  * @licence GNU General Public Licence 2.0 or later
  */
 
-if ( !defined( 'MEDIAWIKI' ) ) {
-	echo( "This file is an extension to the MediaWiki software and cannot be used standalone.\n" );
+if (!defined('MEDIAWIKI')) {
+	echo("This file is an extension to the MediaWiki software and cannot be used standalone.\n");
 	die();
 }
 
-function fnBreadCrumbsShowHook( &$article ) {
+function fnBreadCrumbsShowHook(&$article) {
 	global $wgOut, $wgUser;
 	global $wgBreadCrumbsDelimiter, $wgBreadCrumbsCount, $wgBreadCrumbsShowAnons;
 
 	# Should we display breadcrumbs?
-	if ( !$wgBreadCrumbsShowAnons && $wgUser->isAnon() ){ return true; }
+	if (!$wgBreadCrumbsShowAnons && $wgUser -> isAnon()) {
+		return true;
+	}
 
 	# deserialize data from session into array:
 	$m_BreadCrumbs = array();
-	
+
 	# if we have breadcrumbs, let's us them:
-	if ( isset( $_SESSION['BreadCrumbs'] ) ){ $m_BreadCrumbs = $_SESSION['BreadCrumbs']; }
-	
+	if (isset($_SESSION['BreadCrumbs'])) { $m_BreadCrumbs = $_SESSION['BreadCrumbs'];
+	}
+
 	# cache index of last element:
-	$m_count = count( $m_BreadCrumbs ) - 1;
-	
+	$m_count = count($m_BreadCrumbs) - 1;
+
 	# Title string for the page we're viewing
-	$title = $article->getTitle()->getPrefixedText();
+	$title = $article -> getTitle() -> getPrefixedText();
 
 	# check for doubles:
-	if ( !in_array( $title, $m_BreadCrumbs ) ){
-		if ( $m_count >= 1 ) {
+	if (in_array($title, $m_BreadCrumbs)) {
+		$val = findString($title, $m_BreadCrumbs);
+	}
+
+	if (!in_array($title, $m_BreadCrumbs)) {
+		if ($m_count >= 1) {
 			# reduce the array set, remove older elements:
-			$m_BreadCrumbs = array_slice( $m_BreadCrumbs, ( 1 - $wgBreadCrumbsCount ) );
+			$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wgBreadCrumbsCount));
 		}
 		# add new page:
-		array_push( $m_BreadCrumbs, $title );
+		array_push($m_BreadCrumbs, $title);
 	}
-	
+
 	# serialize data from array to session:
 	$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
-	
+
 	# update cache:
-	$m_count = count( $m_BreadCrumbs ) - 1;
+	$m_count = count($m_BreadCrumbs) - 1;
 
 	# build the breadcrumbs trail:
 	$m_trail = "";
-	for ( $i = 0; $i <= $m_count; $i++ ) {
-		$title = Title::newFromText( $m_BreadCrumbs[$i] );
-		$m_trail .= Linker::link( $title, $m_BreadCrumbs[$i] );
-		if ( $i < $m_count ) $m_trail .= $wgBreadCrumbsDelimiter;
+	for ($i = 0; $i <= $m_count; $i++) {
+		$title = Title::newFromText($m_BreadCrumbs[$i]);
+		$m_trail .= Linker::link($title, $m_BreadCrumbs[$i]);
+		if ($i < $m_count)
+			$m_trail .= $wgBreadCrumbsDelimiter;
 	}
-	
+
 	# ...and add it to the page:
-	$wgOut->setSubtitle( $m_trail );
+	$wgOut -> setSubtitle($m_trail);
 	/*$oldVersion = version_compare( $wgVersion, '1.18', '<=' );
-	if ( $oldVersion ) { $wgOut->setSubtitle( $m_trail ); } 
-	else { $wgOut->addSubtitle( $m_trail ); }*/
-	
+	 if ( $oldVersion ) { $wgOut->setSubtitle( $m_trail ); }
+	 else { $wgOut->addSubtitle( $m_trail ); }*/
+
 	# invalidate internal MediaWiki cache:
-	$wgUser->invalidateCache();
+	$wgUser -> invalidateCache();
 
 	# Return true to let the rest work:
 	return true;
 }
 
 # Entry point for the hook for printing the CSS:
-function fnBreadCrumbsOutputHook( &$outputPage, $parserOutput ) {
+function fnBreadCrumbsOutputHook(&$outputPage, $parserOutput) {
 	global $wgBreadCrumbsShowAnons;
 
-	if ( $wgBreadCrumbsShowAnons || $outputPage->getUser()->isLoggedIn() ) {
-		$outputPage->addModules( 'ext.breadCrumbs' );
+	if ($wgBreadCrumbsShowAnons || $outputPage -> getUser() -> isLoggedIn()) {
+		$outputPage -> addModules('ext.breadCrumbs');
 	}
 
 	# Be nice:
 	return true;
+}
+
+/**
+ * MakeGlobalVariablesScript hook
+ */
+function addVars($vars) {
+	global $wgBreadCrumbsDelimiter;
+	global $wgUser;
+
+	if (!self::enableBreadCrumbs()) {
+		return true;
+	}
+
+	// Allow localized separator to be overriden
+	if ($wgBreadCrumbsDelimiter !== '') {
+		$separator = $wgBreadCrumbsDelimiter;
+	} else {
+		$separator = ' &gt; ';
+	}
+
+	$variables = array();
+
+	$variables['wgBreadCrumbsMaxCrumbs'] = $wgUser -> getOption("breadcrumbs-numberofcrumbs");
+	$variables['wgBreadCrumbsSeparator'] = $separator;
+	$variables['wgBreadCrumbsLeadingDescription'] = wfMsg("breadcrumbs-leading-description");
+	$variables['wgBreadCrumbsShowSiteName'] = $wgUser -> getOption("breadcrumbs-showsite");
+
+	$vars = array_merge($vars, $variables);
+
+	return true;
+}
+
+/**
+ * GetPreferences hook
+ *
+ * Add module-releated items to the preferences
+ */
+function addPreferences($user, $defaultPreferences) {
+	$defaultPreferences['breadcrumbs-showcrumbs'] = array('type' => 'toggle', 'label-message' => 'prefs-jsbreadcrumbs-showcrumbs', 'section' => 'rendering/jsbreadcrumbs', );
+
+	$defaultPreferences['breadcrumbs-showsite'] = array('type' => 'toggle', 'label-message' => 'prefs-jsbreadcrumbs-showsite', 'section' => 'rendering/jsbreadcrumbs', );
+
+	$defaultPreferences['breadcrumbs-numberofcrumbs'] = array('type' => 'int', 'min' => 1, 'max' => 20, 'section' => 'rendering/breadcrumbs', 'help' => wfMsgHtml('prefs-breadcrumbs-numberofcrumbs-max'), 'label-message' => 'prefs-breadcrumbs-numberofcrumbs', );
+
+	return true;
+}
+
+function enableBreadCrumbs() {
+	global $wgUser;
+
+	// Ensure we only enable bread crumbs if we are using vector and the user has them enabled
+	if ($wgUser -> getSkin() instanceof SkinVector && $wgUser -> getOption("breadcrumbs-showcrumbs")) {
+		return true;
+	}
+}
+
+function findString($needle, $haystack) {
+	for ($i = 0; $i < count($haystack); $i++) {
+		if (strcmp($haystack[$i], $needle) == 0) {
+			return $i;
+		}
+	}
+	return false;
 }
