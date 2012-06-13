@@ -20,7 +20,7 @@ $wgBreadCrumbsDelimiter = ' &gt; ';
 # $wgBreadCrumbsCount - number of breadcrumbs to use
 $wgBreadCrumbsCount = 5;
 # Whether to provide the links also for anonymous users
-$wgBreadCrumbsShowAnons = true;
+$wgBreadCrumbsShowAnons = false;
 
 $wgExtensionMessagesFiles['Breadcrumbs'] = dirname( __FILE__ ) . '/BreadCrumbs.i18n.php';
 
@@ -34,11 +34,11 @@ $wgExtensionCredits['parserhook'][] = array(
 );
 
 # Ressource loader
-$wgResourceModules['ext.breadCrumbs'] = array(
+/*$wgResourceModules['ext.breadCrumbs'] = array(
 	#'styles' => 'BreadCrumbs.css',
 	'localBasePath' => dirname( __FILE__ ),
 	'remoteExtPath' => 'BreadCrumbs'
-);
+);*/
 
 # Set Hook:
 
