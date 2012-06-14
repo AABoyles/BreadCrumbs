@@ -17,7 +17,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 # Default Options:
 
 # $wgBreadCrumbsDelimiter - set the delimiter
-$wgDefaultUserOptions['breadcrumbs-delimiter'] = '&gt;';
+$wgDefaultUserOptions['breadcrumbs-delimiter'] = '->';
 
 # $wgBreadCrumbsCount - number of breadcrumbs to use
 $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
@@ -25,11 +25,17 @@ $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
 # Whether to provide breadcrumbs to users by default
 $wgDefaultUserOptions['breadcrumbs-showcrumbs'] = true;
 
-# What to do with the breadcrumbs relative to the subtitle
-$wgDefaultUserOptions['breadcrumbs-subtitle'] = 0;
-
 # Whether to show the breadcrumbs' namesoaces
 $wgDefaultUserOptions['breadcrumbs-namespaces'] = true;
+
+# Where to put the Breadcrumbs
+$wgDefaultUserOptions['breadcrumbs-location'] = 3; #Before Article
+
+# Whether to ignore pages that are already in breadcrumbs
+$wgDefaultUserOptions['breadcrumbs-filter-duplicates'] = false;
+
+# Whether to ignore page refreshes
+$wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] = true;
 
 # Whether to provide the links also for anonymous users:
 $wgBreadCrumbsShowAnons = false;
