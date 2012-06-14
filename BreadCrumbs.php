@@ -47,7 +47,8 @@ $wgExtensionMessagesFiles['Breadcrumbs'] = dirname( __FILE__ ) . '/BreadCrumbs.i
 $wgExtensionCredits['parserhook'][] = array(
 	'path'           => __FILE__,
 	'name'           => 'BreadCrumbs',
-	'author'         => array( 'Manuel Schneider', 'Tony Boyles' ),
+	'version'		 => '0.2b',
+	'author'         => array( 'Manuel Schneider', '[http://milcord.com Tony Boyles, Milcord llc]' ),
 	'url'            => 'https://www.mediawiki.org/wiki/Extension:BreadCrumbs',
 	'descriptionmsg' => 'breadcrumbs-desc',
 );
