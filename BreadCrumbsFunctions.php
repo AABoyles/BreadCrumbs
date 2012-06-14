@@ -17,11 +17,11 @@ if (!defined('MEDIAWIKI')) {
 function fnBreadCrumbsShowHook(&$article) {
 	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgBreadCrumbsShowAnons;
 
-	$options = $wgUser -> getOptions();
+	$wluOptions = $wgUser -> getOptions();
 	
 	# Should we display breadcrumbs?
 	if ((!$wgBreadCrumbsShowAnons && $wgUser -> isAnon()) ||
-	    (!$options['breadcrumbs-showcrumbs'])) {
+	    (!$wluOptions['breadcrumbs-showcrumbs'])) {
 		return true;
 	}
 
@@ -53,7 +53,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	if (!in_array($title, $m_BreadCrumbs)) {
 		if ($m_count >= 1) {
 			# reduce the array set, remove older elements:
-			$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wgDefaultUserOptions['breadcrumbs-numberofcrumbs']));
+			$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
 		}
 		# add new page:
 		array_push($m_BreadCrumbs, $title);
@@ -66,26 +66,24 @@ function fnBreadCrumbsShowHook(&$article) {
 	$m_count = count($m_BreadCrumbs) - 1;
 
 	# build the breadcrumbs trail:
-	$m_trail = "";
+	if ($wluOptions['breadcrumbs-subtitle'] == 2){
+		$m_trail = "$wgOut->getSubtitle<br />";
+	} else {
+		$m_trail = "";
+	}
 	for ($i = 0; $i <= $m_count; $i++) {
 		$title = Title::newFromText($m_BreadCrumbs[$i]);
 		$m_trail .= Linker::link($title, $m_BreadCrumbs[$i]);
-		if ($i < $m_count)
-			$m_trail .= $wgDefaultUserOptions['breadcrumbs-delimiter'];
+		if ($i < $m_count){
+			$m_trail .= ' '.$wluOptions['breadcrumbs-delimiter'].' ';
+		}
 	}
-
+	if ($wluOptions['breadcrumbs-subtitle'] == 0){
+		$m_trail.="<br />$wgOut->getSubtitle";
+	}
+	
 	# ...and add it to the page:
 	$wgOut -> setSubtitle($m_trail);
-	 /*TODO:  This should be exposed to the user/adminstrator as an option
-	  *       i.e. Overwrite subtitle, append to subtitle, prepend subtitle, etc...
-	  *       Once that change is made, this code may be useful-ish:
-	 $oldVersion = version_compare( $wgVersion, '1.18', '<=' );
-	 if ( $oldVersion ) { 
-	   $wgOut->setSubtitle( $m_trail ); 
-	 }
-	 else { 
-	   $wgOut->addSubtitle( $m_trail ); 
-	 }*/
 
 	# invalidate internal MediaWiki cache:
 	$wgUser -> invalidateCache();
@@ -100,6 +98,13 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'prefs-breadcrumbs-showcrumbs',
 	);
+	
+	#TODO: This should be enabled, but I don't feel like figuring out how right now.
+	/*$defaultPreferences['breadcrumbs-namespaces'] = array(
+		'type' => 'toggle',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-namespaces',
+	);*/
 
 	$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
 		'type' => 'int',
@@ -115,7 +120,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'breadcrumbs-separator',
 	);
-	
+
 	$defaultPreferences['breadcrumbs-subtitle'] = array(
 		'type' => 'select',
 		'section' => 'rendering/breadcrumbs',
