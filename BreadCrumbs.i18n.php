@@ -14,7 +14,7 @@ $messages['en'] = array(
 	'prefs-breadcrumbs-showcrumbs' => 'Display bread crumbs',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Number of bread crumbs',
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maximum 20 bread crumbs',
-	'prefs-breadcrumbs-subtitle' => 'Breadcrumbs behavior with preexisting subtitles',
+	'prefs-breadcrumbs-location' => 'Breadcrumbs location',
 	'prefs-breadcrumbs-namespaces' => 'Include Namespeaces in Breadcrumbs'
 );
 

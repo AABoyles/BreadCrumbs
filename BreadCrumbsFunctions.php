@@ -66,24 +66,38 @@ function fnBreadCrumbsShowHook(&$article) {
 	$m_count = count($m_BreadCrumbs) - 1;
 
 	# build the breadcrumbs trail:
-	if ($wluOptions['breadcrumbs-subtitle'] == 2){
-		$m_trail = $wgOut->getSubtitle().'<br />';
-	} else {
-		$m_trail = "";
-	}
+	$breadcrumbs = '';
 	for ($i = 0; $i <= $m_count; $i++) {
 		$title = Title::newFromText($m_BreadCrumbs[$i]);
-		$m_trail .= Linker::link($title, $m_BreadCrumbs[$i]);
-		if ($i < $m_count){
-			$m_trail .= ' '.$wluOptions['breadcrumbs-delimiter'].' ';
+		$breadcrumbs .= Linker::link($title, $m_BreadCrumbs[$i]);
+		if ($i < $m_count) {
+			$breadcrumbs .= ' ' . $wluOptions['breadcrumbs-delimiter'] . ' ';
 		}
 	}
-	if ($wluOptions['breadcrumbs-subtitle'] == 0){
-		$m_trail.='<br />'.$wgOut->getSubtitle();
+	
+	#TODO: This is hideous.  Is there some cleaner way?
+	
+	if ($wluOptions['breadcrumbs-location'] == 0) {
+		$m_trail = $breadcrumbs.'<br />'.$wgOut -> getSubtitle();
+		$wgOut -> setSubtitle($m_trail);
+	} 
+
+	if ($wluOptions['breadcrumbs-location'] == 1) {
+		$wgOut -> setSubtitle($breadcrumbs);
+	}
+
+	if ($wluOptions['breadcrumbs-location'] == 2) {
+		$m_trail = $wgOut->getSubtitle() . '<br />' . $breadcrumbs;
+		$wgOut -> setSubtitle($m_trail);
 	}
 	
-	# ...and add it to the page:
-	$wgOut -> setSubtitle($m_trail);
+	if ($wluOptions['breadcrumbs-location'] == 3) {
+		$wgOut->prependHTML($breadcrumbs . '<br />');
+	}
+	
+	if ($wluOptions['breadcrumbs-location'] == 4) {
+		$wgOut->addHTML('<br />' . $breadcrumbs);
+	}
 
 	# invalidate internal MediaWiki cache:
 	$wgUser -> invalidateCache();
@@ -97,6 +111,19 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'type' => 'toggle',
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'prefs-breadcrumbs-showcrumbs',
+	);
+	
+	$defaultPreferences['breadcrumbs-location'] = array(
+		'type' => 'select',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-location',
+		'options' => array(
+			'Before Subtitle' => 0,
+			'Instead of Subtitle' => 1,
+			'After Subtitle' =>2,
+			'Before Article' => 3,
+			'After Article' => 4
+         )
 	);
 	
 	#TODO: This should be enabled, but I don't feel like figuring out how right now.
@@ -113,7 +140,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'prefs-breadcrumbs-numberofcrumbs',
 		'help' => wfMsgHtml( 'prefs-breadcrumbs-numberofcrumbs-max' ),
-	);	
+	);
 		
 	$defaultPreferences['breadcrumbs-delimiter'] = array(
 		'type' => 'text',
@@ -121,7 +148,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'label-message' => 'breadcrumbs-separator',
 	);
 
-	$defaultPreferences['breadcrumbs-subtitle'] = array(
+	/*$defaultPreferences['breadcrumbs-subtitle'] = array(
 		'type' => 'select',
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'prefs-breadcrumbs-subtitle',
@@ -130,7 +157,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 			'Replace' => 1,
 			'Line After' => 2
          )
-	);
+	);*/
 	
 	return true;
 }
