@@ -15,15 +15,20 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 # Default Options:
+
 # $wgBreadCrumbsDelimiter - set the delimiter
 $wgDefaultUserOptions['breadcrumbs-delimiter'] = ' &gt; ';
+
 # $wgBreadCrumbsCount - number of breadcrumbs to use
 $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
+
 # Whether to provide breadcrumbs to users by default
 $wgDefaultUserOptions['breadcrumbs-showcrumbs'] = true;
-# Whether to provide the links also for anonymous users
+
+# Whether to provide the links also for anonymous users:
 $wgBreadCrumbsShowAnons = false;
 
+# Register the Internationalization file
 $wgExtensionMessagesFiles['Breadcrumbs'] = dirname( __FILE__ ) . '/BreadCrumbs.i18n.php';
 
 # Register extension credits:

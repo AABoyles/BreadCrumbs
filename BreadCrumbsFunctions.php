@@ -17,9 +17,11 @@ if (!defined('MEDIAWIKI')) {
 function fnBreadCrumbsShowHook(&$article) {
 	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgBreadCrumbsShowAnons;
 
+	$options = $wgUser -> getOptions();
+	
 	# Should we display breadcrumbs?
 	if ((!$wgBreadCrumbsShowAnons && $wgUser -> isAnon()) ||
-	    (!$wgDefaultUserOptions['breadcrumbs-showcrumbs'])) {
+	    (!$options['breadcrumbs-showcrumbs'])) {
 		return true;
 	}
 
@@ -93,16 +95,10 @@ function fnBreadCrumbsShowHook(&$article) {
 }
 
 function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
-	$defaultPreferences['breadcrumbs-delimiter'] = array(
-		'type' => 'text',
-		'label-message' => 'prefs-breadcrumbs-showcrumbs',
-		'section' => 'rendering/breadcrumbs',
-	);
-
 	$defaultPreferences['breadcrumbs-showcrumbs'] = array(
 		'type' => 'toggle',
-		'label-message' => 'prefs-breadcrumbs-showcrumbs',
 		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-showcrumbs',
 	);
 
 	$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
@@ -110,9 +106,27 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'min' => 1,
 		'max' => 20,
 		'section' => 'rendering/breadcrumbs',
-		#'help' => wfMsgHtml( 'prefs-breadcrumbs-numberofcrumbs-max' ),
-		'label-message' => 'prefs-jsbreadcrumbs-numberofcrumbs',
+		'label-message' => 'prefs-breadcrumbs-numberofcrumbs',
+		'help' => wfMsgHtml( 'prefs-breadcrumbs-numberofcrumbs-max' ),
+	);	
+		
+	$defaultPreferences['breadcrumbs-delimiter'] = array(
+		'type' => 'text',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'breadcrumbs-separator',
 	);
+	
+	$defaultPreferences['breadcrumbs-subtitle'] = array(
+		'type' => 'select',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-subtitle',
+		'options' => array(
+			'Line Before' => 0,
+			'Replace' => 1,
+			'Line After' => 2
+         )
+	);
+	
 	return true;
 }
 
