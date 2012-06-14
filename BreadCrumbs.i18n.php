@@ -6,6 +6,7 @@ $messages = array();
 
 /** English
  * @author Ryan Lane
+ * @author AABoyles
  */
 $messages['en'] = array(
 	'breadcrumbs-desc' => 'Adds a trail of breadcrumbs below the tab bar',
@@ -15,7 +16,9 @@ $messages['en'] = array(
 	'prefs-breadcrumbs-numberofcrumbs' => 'Number of bread crumbs',
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maximum 20 bread crumbs',
 	'prefs-breadcrumbs-location' => 'Breadcrumbs location',
-	'prefs-breadcrumbs-namespaces' => 'Include Namespeaces in Breadcrumbs'
+	'prefs-breadcrumbs-namespaces' => 'Include Namespaces in Breadcrumbs',
+	'prefs-breadcrumbs-ignore-refreshes' => 'Ignore page refreshes',
+	'prefs-breadcrumbs-filter-duplicates' => 'Filter out repeatedly-visited pages (Overrides Ignore page refreshes)',
 );
 
 /** Message documentation (Message documentation)
