@@ -28,7 +28,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	# deserialize data from session into array:
 	$m_BreadCrumbs = array();
 
-	# if we have breadcrumbs, let's us them:
+	# if we have breadcrumbs, let's use them:
 	if (isset($_SESSION['BreadCrumbs'])) {
 		$m_BreadCrumbs = $_SESSION['BreadCrumbs'];
 	}
@@ -38,44 +38,43 @@ function fnBreadCrumbsShowHook(&$article) {
 
 	# Title string for the page we're viewing
 	$title = $article -> getTitle() -> getPrefixedText();
+	
+	# Was this a page refresh and do we care?
+	if(!($wluOptions['breadcrumbs-ignore-refreshes'] && 
+	     strcmp($title, $m_BreadCrumbs[count($m_BreadCrumbs)-1]) == 0 )) {
 
-	# check for doubles:
-	/*if (in_array($title, $m_BreadCrumbs)) {
-		$val = findString($title, $m_BreadCrumbs);
-		if ($m_count >= 1) {
-			# reduce the array set, remove older elements:
-			$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wgDefaultUserOptions['breadcrumbs-numberofcrumbs']));
+		if( !$wluOptions['breadcrumbs-filter-duplicates'] ||
+			!in_array($title, $m_BreadCrumbs)) {
+			if ($m_count >= 1) {
+				# reduce the array set, remove older elements:
+				$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
+			}
+			# add new page:
+			array_push($m_BreadCrumbs, $title);
 		}
-		# add new page:
-		array_push($m_BreadCrumbs, $title);
-	}*/
 
-	if (!in_array($title, $m_BreadCrumbs)) {
-		if ($m_count >= 1) {
-			# reduce the array set, remove older elements:
-			$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
-		}
-		# add new page:
-		array_push($m_BreadCrumbs, $title);
+		# serialize data from array to session:
+		$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
+
+		# update cache:
+		$m_count = count($m_BreadCrumbs) - 1;
 	}
-
-	# serialize data from array to session:
-	$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
-
-	# update cache:
-	$m_count = count($m_BreadCrumbs) - 1;
-
+		 
 	# build the breadcrumbs trail:
 	$breadcrumbs = '';
 	for ($i = 0; $i <= $m_count; $i++) {
 		$title = Title::newFromText($m_BreadCrumbs[$i]);
-		$breadcrumbs .= Linker::link($title, $m_BreadCrumbs[$i]);
+		if ($wluOptions['breadcrumbs-namespaces']){
+			$breadcrumbs .= Linker::link($title, $m_BreadCrumbs[$i]);
+		} else {
+			$breadcrumbs .= Linker::link($title, $title->getText());
+		}
 		if ($i < $m_count) {
 			$breadcrumbs .= ' ' . $wluOptions['breadcrumbs-delimiter'] . ' ';
 		}
 	}
-	
-	#TODO: This is hideous.  Is there some cleaner way?
+
+	#Set up camp according to the user's choice
 	switch($wluOptions['breadcrumbs-location']){
 		case 0:
 			$m_trail = $breadcrumbs.'<br />'.$wgOut -> getSubtitle();
@@ -111,7 +110,25 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 	$defaultPreferences['breadcrumbs-showcrumbs'] = array(
 		'type' => 'toggle',
 		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-showcrumbs',
+		'label-message' => 'prefs-breadcrumbs-showcrumbs'
+	);
+	
+	$defaultPreferences['breadcrumbs-namespaces'] = array(
+		'type' => 'toggle',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-namespaces',
+	);
+	
+	$defaultPreferences['breadcrumbs-ignore-refreshes'] = array(
+		'type' => 'toggle',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-ignore-refreshes'
+	);
+	
+	$defaultPreferences['breadcrumbs-filter-duplicates'] = array(
+		'type' => 'toggle',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-filter-duplicates'
 	);
 	
 	$defaultPreferences['breadcrumbs-location'] = array(
@@ -127,13 +144,6 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 			'In Header' => 5*/
          )
 	);
-	
-	#TODO: This should be enabled, but I don't feel like figuring out how right now.
-	/*$defaultPreferences['breadcrumbs-namespaces'] = array(
-		'type' => 'toggle',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-namespaces',
-	);*/
 
 	$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
 		'type' => 'int',
