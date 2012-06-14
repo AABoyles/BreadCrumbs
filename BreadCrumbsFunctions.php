@@ -92,7 +92,7 @@ function fnBreadCrumbsShowHook(&$article) {
 			break;
 		#TODO: It would be awesome to have these cases working.
 		/*case 4:
-			$wgOut->addHTML('<br />' . $breadcrumbs);
+			$wgOut->setPageTitle($breadcrumbs);
 			break;
 		case 5:
 			$wgOut->addWikiMsg("Breadcrumbs", $breadcrumbs);
@@ -161,13 +161,4 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 	);
 	
 	return true;
-}
-
-function findString($needle, $haystack) {
-	for ($i = 0; $i < count($haystack); $i++) {
-		if (strcmp($haystack[$i], $needle) == 0) {
-			return $i;
-		}
-	}
-	return false;
 }
