@@ -67,7 +67,7 @@ function fnBreadCrumbsShowHook(&$article) {
 
 	# build the breadcrumbs trail:
 	if ($wluOptions['breadcrumbs-subtitle'] == 2){
-		$m_trail = "$wgOut->getSubtitle<br />";
+		$m_trail = $wgOut->getSubtitle().'<br />';
 	} else {
 		$m_trail = "";
 	}
@@ -79,7 +79,7 @@ function fnBreadCrumbsShowHook(&$article) {
 		}
 	}
 	if ($wluOptions['breadcrumbs-subtitle'] == 0){
-		$m_trail.="<br />$wgOut->getSubtitle";
+		$m_trail.='<br />'.$wgOut->getSubtitle();
 	}
 	
 	# ...and add it to the page:
