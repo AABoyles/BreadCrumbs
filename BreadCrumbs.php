@@ -14,11 +14,13 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die();
 }
 
-# Options:
+# Default Options:
 # $wgBreadCrumbsDelimiter - set the delimiter
-$wgBreadCrumbsDelimiter = ' &gt; ';
+$wgDefaultUserOptions['breadcrumbs-delimiter'] = ' &gt; ';
 # $wgBreadCrumbsCount - number of breadcrumbs to use
-$wgBreadCrumbsCount = 5;
+$wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
+# Whether to provide breadcrumbs to users by default
+$wgDefaultUserOptions['breadcrumbs-showcrumbs'] = true;
 # Whether to provide the links also for anonymous users
 $wgBreadCrumbsShowAnons = false;
 
@@ -33,22 +35,11 @@ $wgExtensionCredits['parserhook'][] = array(
 	'descriptionmsg' => 'breadcrumbs-desc',
 );
 
-# Ressource loader
-/*$wgResourceModules['ext.breadCrumbs'] = array(
-	#'styles' => 'BreadCrumbs.css',
-	'localBasePath' => dirname( __FILE__ ),
-	'remoteExtPath' => 'BreadCrumbs'
-);*/
-
-# Set Hook:
-
 # Showing and updating the breadcrumbs trail
 # Hook when viewing article header:
 $wgHooks['ArticleViewHeader'][] = 'fnBreadCrumbsShowHook';
+$wgHooks['GetPreferences'][] = 'fnBreadCrumbsAddPreferences';
 
 # Infrastructure
-# Hook our own CSS:
-$wgHooks['OutputPageParserOutput'][] = 'fnBreadCrumbsOutputHook';
-
 # Load the file containing the hook functions:
 require_once( 'BreadCrumbsFunctions.php' );
