@@ -76,27 +76,28 @@ function fnBreadCrumbsShowHook(&$article) {
 	}
 	
 	#TODO: This is hideous.  Is there some cleaner way?
-	
-	if ($wluOptions['breadcrumbs-location'] == 0) {
-		$m_trail = $breadcrumbs.'<br />'.$wgOut -> getSubtitle();
-		$wgOut -> setSubtitle($m_trail);
-	} 
-
-	if ($wluOptions['breadcrumbs-location'] == 1) {
-		$wgOut -> setSubtitle($breadcrumbs);
-	}
-
-	if ($wluOptions['breadcrumbs-location'] == 2) {
-		$m_trail = $wgOut->getSubtitle() . '<br />' . $breadcrumbs;
-		$wgOut -> setSubtitle($m_trail);
-	}
-	
-	if ($wluOptions['breadcrumbs-location'] == 3) {
-		$wgOut->prependHTML($breadcrumbs . '<br />');
-	}
-	
-	if ($wluOptions['breadcrumbs-location'] == 4) {
-		$wgOut->addHTML('<br />' . $breadcrumbs);
+	switch($wluOptions['breadcrumbs-location']){
+		case 0:
+			$m_trail = $breadcrumbs.'<br />'.$wgOut -> getSubtitle();
+			$wgOut -> setSubtitle($m_trail);
+			break;
+		case 1:
+			$wgOut -> setSubtitle($breadcrumbs);
+			break;
+		case 2:
+			$m_trail = $wgOut->getSubtitle() . '<br />' . $breadcrumbs;
+			$wgOut -> setSubtitle($m_trail);
+			break;
+		case 3:
+			$wgOut->prependHTML($breadcrumbs);
+			break;
+		#TODO: It would be awesome to have these cases working.
+		/*case 4:
+			$wgOut->addHTML('<br />' . $breadcrumbs);
+			break;
+		case 5:
+			$wgOut->addWikiMsg("Breadcrumbs", $breadcrumbs);
+			break;*/
 	}
 
 	# invalidate internal MediaWiki cache:
@@ -122,7 +123,8 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 			'Instead of Subtitle' => 1,
 			'After Subtitle' =>2,
 			'Before Article' => 3,
-			'After Article' => 4
+			/*'After Article' => 4,
+			'In Header' => 5*/
          )
 	);
 	
@@ -147,17 +149,6 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'breadcrumbs-separator',
 	);
-
-	/*$defaultPreferences['breadcrumbs-subtitle'] = array(
-		'type' => 'select',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-subtitle',
-		'options' => array(
-			'Line Before' => 0,
-			'Replace' => 1,
-			'Line After' => 2
-         )
-	);*/
 	
 	return true;
 }
