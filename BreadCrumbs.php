@@ -37,6 +37,9 @@ $wgDefaultUserOptions['breadcrumbs-filter-duplicates'] = false;
 # Whether to ignore page refreshes
 $wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] = true;
 
+# Text to appear before breadcrumbs
+$wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
+
 # Whether to provide the links also for anonymous users:
 $wgBreadCrumbsShowAnons = false;
 

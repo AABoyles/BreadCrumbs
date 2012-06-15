@@ -9,8 +9,8 @@ $messages = array();
  * @author AABoyles
  */
 $messages['en'] = array(
-	'breadcrumbs-desc' => 'Adds a trail of breadcrumbs below the tab bar',
-	'breadcrumbs-separator' => 'Breadcrumb separator',
+	'breadcrumbs-desc' => 'Adds a trail of breadcrumbs to the page',
+	'prefs-breadcrumbs-separator' => 'Breadcrumb separator',
 	'prefs-breadcrumbs' => 'Bread Crumbs',
 	'prefs-breadcrumbs-showcrumbs' => 'Display bread crumbs',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Number of bread crumbs',
@@ -19,6 +19,7 @@ $messages['en'] = array(
 	'prefs-breadcrumbs-namespaces' => 'Include Namespaces in Breadcrumbs',
 	'prefs-breadcrumbs-ignore-refreshes' => 'Ignore page refreshes',
 	'prefs-breadcrumbs-filter-duplicates' => 'Filter out repeatedly-visited pages (Overrides Ignore page refreshes)',
+	'prefs-breadcrumbs-preceding-text' => 'Text to appear before Breadcrumbs'
 );
 
 /** Message documentation (Message documentation)

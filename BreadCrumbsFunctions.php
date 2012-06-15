@@ -61,7 +61,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	}
 		 
 	# build the breadcrumbs trail:
-	$breadcrumbs = '';
+	$breadcrumbs = $wluOptions['breadcrumbs-preceding-text'] . ' ';
 	for ($i = 0; $i <= $m_count; $i++) {
 		$title = Title::newFromText($m_BreadCrumbs[$i]);
 		if ($wluOptions['breadcrumbs-namespaces']){
@@ -153,11 +153,17 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'label-message' => 'prefs-breadcrumbs-numberofcrumbs',
 		'help' => wfMsgHtml( 'prefs-breadcrumbs-numberofcrumbs-max' ),
 	);
+
+	$defaultPreferences['breadcrumbs-preceding-text'] = array(
+		'type' => 'text',
+		'section' => 'rendering/breadcrumbs',
+		'label-message' => 'prefs-breadcrumbs-preceding-text',
+	);
 		
 	$defaultPreferences['breadcrumbs-delimiter'] = array(
 		'type' => 'text',
 		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'breadcrumbs-separator',
+		'label-message' => 'prefs-breadcrumbs-separator',
 	);
 	
 	return true;
