@@ -17,8 +17,7 @@ $messages['en'] = array(
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maximum 20 bread crumbs',
 	'prefs-breadcrumbs-location' => 'Breadcrumbs location',
 	'prefs-breadcrumbs-namespaces' => 'Include Namespaces in Breadcrumbs',
-	'prefs-breadcrumbs-ignore-refreshes' => 'Ignore page refreshes',
-	'prefs-breadcrumbs-filter-duplicates' => 'Filter out repeatedly-visited pages (Overrides Ignore page refreshes)',
+	'prefs-breadcrumbs-filter-duplicates' => 'Filter out repeatedly-visited pages',
 	'prefs-breadcrumbs-preceding-text' => 'Text to appear before Breadcrumbs'
 );
 

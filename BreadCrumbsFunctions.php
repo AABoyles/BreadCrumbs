@@ -40,7 +40,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	$title = $article -> getTitle() -> getPrefixedText();
 	
 	# Was this a page refresh and do we care?
-	if(!($wluOptions['breadcrumbs-ignore-refreshes'] && 
+	if(!($wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] && 
 	     strcmp($title, $m_BreadCrumbs[count($m_BreadCrumbs)-1]) == 0 )) {
 
 		if( !$wluOptions['breadcrumbs-filter-duplicates'] ||
@@ -117,12 +117,6 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 		'type' => 'toggle',
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'prefs-breadcrumbs-namespaces',
-	);
-	
-	$defaultPreferences['breadcrumbs-ignore-refreshes'] = array(
-		'type' => 'toggle',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-ignore-refreshes'
 	);
 	
 	$defaultPreferences['breadcrumbs-filter-duplicates'] = array(
