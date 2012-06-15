@@ -1,3 +1,7 @@
+* v0.2b - 2012-06-14
+  - Exposed a variety of options to the user in [[Special:Preferences]]
+  - Provided advanced logic for breadcrumb creation/handling
+
 * v0.2 - 2012-06-12
   - fixed breadcrumb uniqueness checker
   - removed CSS file, replaced with in-wiki formatting
