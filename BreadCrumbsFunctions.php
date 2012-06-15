@@ -101,6 +101,8 @@ function fnBreadCrumbsShowHook(&$article) {
 
 	# invalidate internal MediaWiki cache:
 	$wgUser -> invalidateCache();
+	# Must be done so that stale Breadcrumbs aren't cached into pages the user visits repeatedly.
+	# This makes this a risky extension to run on a wiki which relies heavily on caching.
 
 	# Return true to let the rest work:
 	return true;
