@@ -61,7 +61,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	}
 		 
 	# build the breadcrumbs trail:
-	$breadcrumbs = $wluOptions['breadcrumbs-preceding-text'] . ' ';
+	$breadcrumbs = htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ';
 	for ($i = 0; $i <= $m_count; $i++) {
 		$title = Title::newFromText($m_BreadCrumbs[$i]);
 		if ($wluOptions['breadcrumbs-namespaces']){
@@ -70,7 +70,7 @@ function fnBreadCrumbsShowHook(&$article) {
 			$breadcrumbs .= Linker::link($title, $title->getText());
 		}
 		if ($i < $m_count) {
-			$breadcrumbs .= ' ' . $wluOptions['breadcrumbs-delimiter'] . ' ';
+			$breadcrumbs .= ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ';
 		}
 	}
 
