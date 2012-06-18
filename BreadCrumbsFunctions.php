@@ -20,8 +20,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	$wluOptions = $wgUser -> getOptions();
 	
 	# Should we display breadcrumbs?
-	if ((!$wgBreadCrumbsShowAnons && $wgUser -> isAnon()) ||
-	    (!$wluOptions['breadcrumbs-showcrumbs'])) {
+	if ((!$wgBreadCrumbsShowAnons && $wgUser -> isAnon()) || (!$wluOptions['breadcrumbs-showcrumbs'])) {
 		return true;
 	}
 
@@ -43,14 +42,8 @@ function fnBreadCrumbsShowHook(&$article) {
 	if ($m_count > -1){
 		# Was this a page refresh and do we care?
 		if (!($wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] && 
-			  strcmp($title, $m_BreadCrumbs[$m_count]) == 0)) {
-			if (!$wluOptions['breadcrumbs-filter-duplicates'] || 
-				!in_array($title, $m_BreadCrumbs)) {
-				if ($m_count >= 1) {
-					# reduce the array set, remove older elements:
-					$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
-				}
-				# add new page:
+			strcmp($title, $m_BreadCrumbs[$m_count]) == 0)) {
+			if (!$wluOptions['breadcrumbs-filter-duplicates'] || !in_array($title, $m_BreadCrumbs)) {
 				array_push($m_BreadCrumbs, $title);
 			}
 			# serialize data from array to session:
@@ -72,15 +65,16 @@ function fnBreadCrumbsShowHook(&$article) {
 	#TODO: Fix edge case so Users can select 1 breadcrumb and it shows only the latest page
 	$breadcrumbs = htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ';
 	$max = min(array($wluOptions['breadcrumbs-numberofcrumbs'], count($m_BreadCrumbs)));
-	for ($i = 0; $i < $max; $i++) {
-		$title = Title::newFromText($m_BreadCrumbs[$i]);
+	for ($i = 1; $i <= $max; $i++) {
+		$j = count($m_BreadCrumbs) - $i;
+		$title = Title::newFromText($m_BreadCrumbs[$j]);
 		if ($wluOptions['breadcrumbs-namespaces']){
-			$breadcrumbs .= Linker::link($title, $m_BreadCrumbs[$i]);
+			$breadcrumbs = Linker::link($title, $m_BreadCrumbs[$j]) . $breadcrumbs;
 		} else {
-			$breadcrumbs .= Linker::link($title, $title->getText());
+			$breadcrumbs = Linker::link($title, $title->getText()) . $breadcrumbs;
 		}
-		if ($i < $max - 1) {
-			$breadcrumbs .= ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ';
+		if ($i < $max) {
+			$breadcrumbs = ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ' . $breadcrumbs;
 		}
 	}
 
@@ -120,9 +114,10 @@ function fnBreadCrumbsShowHook(&$article) {
 
 function fnFlushCrumbs () {
 	#If we just changed our settings, let's be certain to cut our breadcrumbs down to size!
-	if(isset($_SESSION['BreadCrumbs'])){
-		$_SESSION['BreadCrumbs'] = array_slice($_SESSION['BreadCrumbs'], (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
-	}
+	/*if(isset($_SESSION['BreadCrumbs'])){
+		$_SESSION['BreadCrumbs'] = array_slice($_SESSION['BreadCrumbs'], 
+			(1 - $wluOptions['breadcrumbs-numberofcrumbs']));
+	}*/
 	#TODO: We could store Breadcrumb histories in the DB... Think about it!
 	return true;
 }
