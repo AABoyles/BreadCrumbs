@@ -112,16 +112,6 @@ function fnBreadCrumbsShowHook(&$article) {
 	return true;
 }
 
-function fnFlushCrumbs () {
-	#If we just changed our settings, let's be certain to cut our breadcrumbs down to size!
-	/*if(isset($_SESSION['BreadCrumbs'])){
-		$_SESSION['BreadCrumbs'] = array_slice($_SESSION['BreadCrumbs'], 
-			(1 - $wluOptions['breadcrumbs-numberofcrumbs']));
-	}*/
-	#TODO: We could store Breadcrumb histories in the DB... Think about it!
-	return true;
-}
-
 function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 	$defaultPreferences['breadcrumbs-showcrumbs'] = array(
 		'type' => 'toggle',
