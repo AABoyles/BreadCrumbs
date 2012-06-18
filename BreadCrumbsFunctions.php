@@ -40,7 +40,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	$title = $article -> getTitle() -> getPrefixedText();
 	
 	# Are there any Breadcrumbs to see?
-	if ($m_count != -1){
+	if ($m_count > -1){
 		# Was this a page refresh and do we care?
 		if (!($wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] && 
 			  strcmp($title, $m_BreadCrumbs[$m_count]) == 0)) {
@@ -68,21 +68,23 @@ function fnBreadCrumbsShowHook(&$article) {
 		$m_count = count($m_BreadCrumbs) - 1;
 	}
 	
-	# build the breadcrumbs trail:
+	# Build the breadcrumbs trail:
+	#TODO: Fix edge case so Users can select 1 breadcrumb and it shows only the latest page
 	$breadcrumbs = htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ';
-	for ($i = 0; $i <= $m_count; $i++) {
+	$max = min(array($wluOptions['breadcrumbs-numberofcrumbs'], count($m_BreadCrumbs)));
+	for ($i = 0; $i < $max; $i++) {
 		$title = Title::newFromText($m_BreadCrumbs[$i]);
 		if ($wluOptions['breadcrumbs-namespaces']){
 			$breadcrumbs .= Linker::link($title, $m_BreadCrumbs[$i]);
 		} else {
 			$breadcrumbs .= Linker::link($title, $title->getText());
 		}
-		if ($i < $m_count) {
+		if ($max > $i + 1) {
 			$breadcrumbs .= ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ';
 		}
 	}
 
-	#Set up camp according to the user's choice
+	# Set up camp according to the user's choice
 	switch($wluOptions['breadcrumbs-location']){
 		case 0:
 			$m_trail = $breadcrumbs.'<br />'.$wgOut -> getSubtitle();
@@ -113,6 +115,16 @@ function fnBreadCrumbsShowHook(&$article) {
 	# This makes this a risky extension to run on a wiki which relies heavily on caching.
 
 	# Return true to let the rest work:
+	return true;
+}
+
+function fnFlushCrumbs () {
+	#If we just changed our settings, let's be certain to cut our breadcrumbs down to size!
+	if(isset($_SESSION['BreadCrumbs'])){
+		$_SESSION['BreadCrumbs'] = array_slice($_SESSION['BreadCrumbs'], 
+										(1 - $wluOptions['breadcrumbs-numberofcrumbs']));
+	}
+	#TODO: We could store Breadcrumb histories in the DB... Think about it!
 	return true;
 }
 
@@ -151,7 +163,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 
 	$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
 		'type' => 'int',
-		'min' => 1,
+		'min' => 2,
 		'max' => 20,
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'prefs-breadcrumbs-numberofcrumbs',
