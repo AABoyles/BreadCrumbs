@@ -157,7 +157,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 
 	$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
 		'type' => 'int',
-		'min' => 2,
+		'min' => 1,
 		'max' => 20,
 		'section' => 'rendering/breadcrumbs',
 		'label-message' => 'prefs-breadcrumbs-numberofcrumbs',
