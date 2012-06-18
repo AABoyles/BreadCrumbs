@@ -39,27 +39,35 @@ function fnBreadCrumbsShowHook(&$article) {
 	# Title string for the page we're viewing
 	$title = $article -> getTitle() -> getPrefixedText();
 	
-	# Was this a page refresh and do we care?
-	if(!($wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] && 
-	     strcmp($title, $m_BreadCrumbs[count($m_BreadCrumbs)-1]) == 0 )) {
-
-		if( !$wluOptions['breadcrumbs-filter-duplicates'] ||
-			!in_array($title, $m_BreadCrumbs)) {
-			if ($m_count >= 1) {
-				# reduce the array set, remove older elements:
-				$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
+	# Are there any Breadcrumbs to see?
+	if ($m_count != -1){
+		# Was this a page refresh and do we care?
+		if (!($wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] && 
+			  strcmp($title, $m_BreadCrumbs[$m_count]) == 0)) {
+			if (!$wluOptions['breadcrumbs-filter-duplicates'] || 
+				!in_array($title, $m_BreadCrumbs)) {
+				if ($m_count >= 1) {
+					# reduce the array set, remove older elements:
+					$m_BreadCrumbs = array_slice($m_BreadCrumbs, (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
+				}
+				# add new page:
+				array_push($m_BreadCrumbs, $title);
 			}
-			# add new page:
-			array_push($m_BreadCrumbs, $title);
+			# serialize data from array to session:
+			$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
+			# update cache:
+			$m_count = count($m_BreadCrumbs) - 1;
 		}
-
+	# If there aren't any breadcrumbs, we still want to add to the current page to the list.
+	} else {
+		# add new page:
+		array_push($m_BreadCrumbs, $title);
 		# serialize data from array to session:
 		$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
-
 		# update cache:
 		$m_count = count($m_BreadCrumbs) - 1;
 	}
-		 
+	
 	# build the breadcrumbs trail:
 	$breadcrumbs = htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ';
 	for ($i = 0; $i <= $m_count; $i++) {
