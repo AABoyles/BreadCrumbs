@@ -79,7 +79,7 @@ function fnBreadCrumbsShowHook(&$article) {
 		} else {
 			$breadcrumbs .= Linker::link($title, $title->getText());
 		}
-		if ($max > $i + 1) {
+		if ($i < $max - 1) {
 			$breadcrumbs .= ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ';
 		}
 	}
@@ -121,8 +121,7 @@ function fnBreadCrumbsShowHook(&$article) {
 function fnFlushCrumbs () {
 	#If we just changed our settings, let's be certain to cut our breadcrumbs down to size!
 	if(isset($_SESSION['BreadCrumbs'])){
-		$_SESSION['BreadCrumbs'] = array_slice($_SESSION['BreadCrumbs'], 
-										(1 - $wluOptions['breadcrumbs-numberofcrumbs']));
+		$_SESSION['BreadCrumbs'] = array_slice($_SESSION['BreadCrumbs'], (1 - $wluOptions['breadcrumbs-numberofcrumbs']));
 	}
 	#TODO: We could store Breadcrumb histories in the DB... Think about it!
 	return true;
