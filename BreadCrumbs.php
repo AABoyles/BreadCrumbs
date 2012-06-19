@@ -5,7 +5,7 @@
  * @file
  * @ingroup Extensions
  * @author Manuel Schneider <manuel.schneider@wikimedia.ch>, Tony Boyles <ABoyles@milcord.com>
- * @copyright © 2007 by Manuel Schneider, 2012 by Tony Boyles
+ * @copyright © 2007 by Manuel Schneider, 2012 by Tony Boyles, Milcord llc
  * @licence GNU General Public Licence 2.0 or later
  */
 
@@ -50,7 +50,7 @@ $wgExtensionMessagesFiles['Breadcrumbs'] = dirname( __FILE__ ) . '/BreadCrumbs.i
 $wgExtensionCredits['parserhook'][] = array(
 	'path'           => __FILE__,
 	'name'           => 'BreadCrumbs',
-	'version'		 => '0.2b',
+	'version'		 => '0.5',
 	'author'         => array( 'Manuel Schneider', '[http://milcord.com Tony Boyles, Milcord llc]' ),
 	'url'            => 'https://www.mediawiki.org/wiki/Extension:BreadCrumbs',
 	'descriptionmsg' => 'breadcrumbs-desc',

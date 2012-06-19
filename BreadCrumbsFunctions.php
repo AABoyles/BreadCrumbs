@@ -56,13 +56,13 @@ function fnBreadCrumbsShowHook(&$article) {
 		# add new page:
 		array_push($m_BreadCrumbs, $title);
 		# serialize data from array to session:
+		#TODO: Switch to $wgRequest
 		$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
 		# update cache:
 		$m_count = count($m_BreadCrumbs) - 1;
 	}
 	
 	# Build the breadcrumbs trail:
-	#TODO: Fix edge case so Users can select 1 breadcrumb and it shows only the latest page
 	$breadcrumbs = '';
 	$max = min(array($wluOptions['breadcrumbs-numberofcrumbs'], count($m_BreadCrumbs)));
 	for ($i = 1; $i <= $max; $i++) {
