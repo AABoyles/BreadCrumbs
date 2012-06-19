@@ -63,7 +63,6 @@ function fnBreadCrumbsShowHook(&$article) {
 	
 	# Build the breadcrumbs trail:
 	#TODO: Fix edge case so Users can select 1 breadcrumb and it shows only the latest page
-	$breadcrumbs = htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ';
 	$max = min(array($wluOptions['breadcrumbs-numberofcrumbs'], count($m_BreadCrumbs)));
 	for ($i = 1; $i <= $max; $i++) {
 		$j = count($m_BreadCrumbs) - $i;
@@ -77,6 +76,8 @@ function fnBreadCrumbsShowHook(&$article) {
 			$breadcrumbs = ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ' . $breadcrumbs;
 		}
 	}
+
+	$breadcrumbs = htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ' . $breadcrumbs;
 
 	# Set up camp according to the user's choice
 	switch($wluOptions['breadcrumbs-location']){
