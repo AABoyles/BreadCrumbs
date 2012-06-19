@@ -17,7 +17,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 # Default Options:
 
 # $wgBreadCrumbsDelimiter - set the delimiter
-$wgDefaultUserOptions['breadcrumbs-delimiter'] = '->';
+$wgDefaultUserOptions['breadcrumbs-delimiter'] = '>';
 
 # $wgBreadCrumbsCount - number of breadcrumbs to use
 $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
