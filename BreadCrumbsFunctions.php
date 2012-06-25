@@ -114,58 +114,60 @@ function fnBreadCrumbsShowHook(&$article) {
 }
 
 function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
-	$defaultPreferences['breadcrumbs-showcrumbs'] = array(
-		'type' => 'toggle',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-showcrumbs'
-	);
+	if ( $wgBreadCrumbsAllowUPOs ){
+		$defaultPreferences['breadcrumbs-showcrumbs'] = array(
+			'type' => 'toggle',
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-showcrumbs'
+		);
 	
-	$defaultPreferences['breadcrumbs-namespaces'] = array(
-		'type' => 'toggle',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-namespaces',
-	);
+		$defaultPreferences['breadcrumbs-namespaces'] = array(
+			'type' => 'toggle',
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-namespaces',
+		);
 	
-	$defaultPreferences['breadcrumbs-filter-duplicates'] = array(
-		'type' => 'toggle',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-filter-duplicates'
-	);
+		$defaultPreferences['breadcrumbs-filter-duplicates'] = array(
+			'type' => 'toggle',
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-filter-duplicates'
+		);
 	
-	$defaultPreferences['breadcrumbs-location'] = array(
-		'type' => 'select',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-location',
-		'options' => array(
-			'Before Subtitle' => 0,
-			'Instead of Subtitle' => 1,
-			'After Subtitle' =>2,
-			'Before Article' => 3,
-			/*'After Article' => 4,
-			'In Header' => 5*/
-         )
-	);
+		$defaultPreferences['breadcrumbs-location'] = array(
+			'type' => 'select',
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-location',
+			'options' => array(
+				'Before Subtitle' => 0,
+				'Instead of Subtitle' => 1,
+				'After Subtitle' =>2,
+				'Before Article' => 3,
+				/*'After Article' => 4,
+				'In Header' => 5*/
+        	 )
+		);
 
-	$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
-		'type' => 'int',
-		'min' => 1,
-		'max' => 20,
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-numberofcrumbs',
-		'help' => wfMsgHtml( 'prefs-breadcrumbs-numberofcrumbs-max' ),
-	);
+		$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
+			'type' => 'int',
+			'min' => 1,
+			'max' => 20,
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-numberofcrumbs',
+			'help' => wfMsgHtml( 'prefs-breadcrumbs-numberofcrumbs-max' ),
+		);
 
-	$defaultPreferences['breadcrumbs-preceding-text'] = array(
-		'type' => 'text',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-preceding-text',
-	);
+		$defaultPreferences['breadcrumbs-preceding-text'] = array(
+			'type' => 'text',
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-preceding-text',
+		);
 		
-	$defaultPreferences['breadcrumbs-delimiter'] = array(
-		'type' => 'text',
-		'section' => 'rendering/breadcrumbs',
-		'label-message' => 'prefs-breadcrumbs-separator',
-	);
+		$defaultPreferences['breadcrumbs-delimiter'] = array(
+			'type' => 'text',
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-separator',
+		);
+	}
 	
 	return true;
 }

@@ -16,6 +16,9 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 # Default Options:
 
+# $wgBreadCrumbsAllowUPOs - Should users be allowed to configure BreadCrumbs Options?
+$wgBreadCrumbsAllowUPOs = true;
+
 # $wgBreadCrumbsDelimiter - set the delimiter
 $wgDefaultUserOptions['breadcrumbs-delimiter'] = '>';
 
