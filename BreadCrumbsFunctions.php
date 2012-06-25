@@ -93,7 +93,7 @@ function fnBreadCrumbsShowHook(&$article) {
 			$wgOut -> setSubtitle($m_trail);
 			break;
 		case 3:
-			$wgOut->prependHTML($breadcrumbs);
+			$wgOut -> prependHTML($breadcrumbs);
 			break;
 		#TODO: It would be awesome to have these cases working.
 		/*case 4:
