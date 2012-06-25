@@ -4,7 +4,7 @@
  *
  * @file
  * @ingroup Extensions
- * @author Manuel Schneider <manuel.schneider@wikimedia.ch>, Tony Boyles <ABoyles@milcord.com>, Ryan Lane
+ * @author Manuel Schneider <manuel.schneider@wikimedia.ch>, Tony Boyles <ABoyles@milcord.com>
  * @copyright © 2007 by Manuel Schneider, 2012 by Tony Boyles, Milcord llc
  * @licence GNU General Public Licence 2.0 or later
  */
@@ -15,7 +15,7 @@ if (!defined('MEDIAWIKI')) {
 }
 
 function fnBreadCrumbsShowHook(&$article) {
-	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgBreadCrumbsShowAnons;
+	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes;
 
 	$wluOptions = $wgUser -> getOptions();
 	
@@ -41,7 +41,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	# Are there any Breadcrumbs to see?
 	if ($m_count > -1){
 		# Was this a page refresh and do we care?
-		if (!($wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] && 
+		if (!($wgBreadCrumbsIgnoreRefreshes && 
 			strcmp($title, $m_BreadCrumbs[$m_count]) == 0)) {
 			if (!$wluOptions['breadcrumbs-filter-duplicates'] || !in_array($title, $m_BreadCrumbs)) {
 				array_push($m_BreadCrumbs, $title);
@@ -59,7 +59,7 @@ function fnBreadCrumbsShowHook(&$article) {
 		#TODO: Switch to $wgRequest
 		$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
 		# update cache:
-		$m_count = count($m_BreadCrumbs) - 1;
+		$m_count++; #= count($m_BreadCrumbs) - 1;
 	}
 	
 	# Build the breadcrumbs trail:
@@ -69,17 +69,18 @@ function fnBreadCrumbsShowHook(&$article) {
 		$j = count($m_BreadCrumbs) - $i;
 		$title = Title::newFromText($m_BreadCrumbs[$j]);
 		if ($wluOptions['breadcrumbs-namespaces']){
-			$breadcrumbs = Linker::link($title, $m_BreadCrumbs[$j]) . $breadcrumbs;
+			$breadcrumb = Linker::link($title, $m_BreadCrumbs[$j]);
 		} else {
-			$breadcrumbs = Linker::link($title, $title->getText()) . $breadcrumbs;
+			$breadcrumb = Linker::link($title, $title->getText());
 		}
+		$breadcrumbs = $breadcrumb . $breadcrumbs;
 		if ($i < $max) {
 			$breadcrumbs = ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ' . $breadcrumbs;
 		}
 	}
 	$breadcrumbs = '<div id="breadcrumbs">' . htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ' . $breadcrumbs . '</div>';
 
-	# Set up camp according to the user's choice
+	# Set up camp
 	$wgOut -> prependHTML($breadcrumbs);
 
 	# invalidate internal MediaWiki cache:
@@ -92,6 +93,8 @@ function fnBreadCrumbsShowHook(&$article) {
 }
 
 function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
+	global $wgBreadCrumbsAllowUPOs;
+	
 	if ( $wgBreadCrumbsAllowUPOs ){
 		$defaultPreferences['breadcrumbs-showcrumbs'] = array(
 			'type' => 'toggle',
