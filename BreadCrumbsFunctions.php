@@ -77,32 +77,10 @@ function fnBreadCrumbsShowHook(&$article) {
 			$breadcrumbs = ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ' . $breadcrumbs;
 		}
 	}
-	$breadcrumbs = htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ' . $breadcrumbs;
+	$breadcrumbs = '<div id="breadcrumbs">' . htmlspecialchars($wluOptions['breadcrumbs-preceding-text']) . ' ' . $breadcrumbs . '</div>';
 
 	# Set up camp according to the user's choice
-	switch($wluOptions['breadcrumbs-location']){
-		case 0:
-			$m_trail = $breadcrumbs.'<br />'.$wgOut -> getSubtitle();
-			$wgOut -> setSubtitle($m_trail);
-			break;
-		case 1:
-			$wgOut -> setSubtitle($breadcrumbs);
-			break;
-		case 2:
-			$m_trail = $wgOut->getSubtitle() . '<br />' . $breadcrumbs;
-			$wgOut -> setSubtitle($m_trail);
-			break;
-		case 3:
-			$wgOut -> prependHTML($breadcrumbs);
-			break;
-		#TODO: It would be awesome to have these cases working.
-		/*case 4:
-			$wgOut->setPageTitle($breadcrumbs);
-			break;
-		case 5:
-			$wgOut->addWikiMsg("Breadcrumbs", $breadcrumbs);
-			break;*/
-	}
+	$wgOut -> prependHTML($breadcrumbs);
 
 	# invalidate internal MediaWiki cache:
 	$wgUser -> invalidateCache();
@@ -131,20 +109,6 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 			'type' => 'toggle',
 			'section' => 'rendering/breadcrumbs',
 			'label-message' => 'prefs-breadcrumbs-filter-duplicates'
-		);
-	
-		$defaultPreferences['breadcrumbs-location'] = array(
-			'type' => 'select',
-			'section' => 'rendering/breadcrumbs',
-			'label-message' => 'prefs-breadcrumbs-location',
-			'options' => array(
-				'Before Subtitle' => 0,
-				'Instead of Subtitle' => 1,
-				'After Subtitle' =>2,
-				'Before Article' => 3,
-				/*'After Article' => 4,
-				'In Header' => 5*/
-        	 )
 		);
 
 		$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
