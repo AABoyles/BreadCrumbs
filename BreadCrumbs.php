@@ -59,11 +59,23 @@ $wgExtensionCredits['parserhook'][] = array(
 	'descriptionmsg' => 'breadcrumbs-desc',
 );
 
-# Showing and updating the breadcrumbs trail
-# Hook when viewing article header:
+# Hooks:
+
+# Load BreadCrumbs when viewing article header
 $wgHooks['ArticleViewHeader'][] = 'fnBreadCrumbsShowHook';
+
+# When presenting Options to Users, add BreadCrumbs configurations
 $wgHooks['GetPreferences'][] = 'fnBreadCrumbsAddPreferences';
 
-# Infrastructure
+
+# Infrastructure:
+
 # Load the file containing the hook functions:
 require_once( 'BreadCrumbsFunctions.php' );
+
+# Ressource loader		
+$wgResourceModules['ext.breadCrumbs'] = array(		
+	'styles' => 'BreadCrumbs.css',		
+	'localBasePath' => dirname( __FILE__ ),		
+	'remoteExtPath' => 'BreadCrumbs'		
+);
