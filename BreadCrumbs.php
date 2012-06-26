@@ -40,24 +40,12 @@ $wgDefaultUserOptions['breadcrumbs-filter-duplicates'] = false;
 # Whether to ignore page refreshes
 $wgBreadCrumbsIgnoreRefreshes = true;
 
-# Whether to rearrange history
+# Whether to rearrange history - Not yet used
 $wgBreadCrumbsRearrangeHistory = false;
 
 # Text to appear before breadcrumbs
 $wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
 
-# Register the Internationalization file
-$wgExtensionMessagesFiles['Breadcrumbs'] = dirname( __FILE__ ) . '/BreadCrumbs.i18n.php';
-
-# Register extension credits:
-$wgExtensionCredits['parserhook'][] = array(
-	'path'           => __FILE__,
-	'name'           => 'BreadCrumbs',
-	'version'		 => '0.3',
-	'author'         => array( 'Manuel Schneider', '[http://milcord.com Tony Boyles, Milcord llc]' ),
-	'url'            => 'https://www.mediawiki.org/wiki/Extension:BreadCrumbs',
-	'descriptionmsg' => 'breadcrumbs-desc',
-);
 
 # Hooks:
 
@@ -70,12 +58,25 @@ $wgHooks['GetPreferences'][] = 'fnBreadCrumbsAddPreferences';
 
 # Infrastructure:
 
+# Register the Internationalization file
+$wgExtensionMessagesFiles['Breadcrumbs'] = dirname( __FILE__ ) . '/BreadCrumbs.i18n.php';
+
 # Load the file containing the hook functions:
 require_once( 'BreadCrumbsFunctions.php' );
 
-# Ressource loader		
-$wgResourceModules['ext.breadCrumbs'] = array(		
-	'styles' => 'BreadCrumbs.css',		
-	'localBasePath' => dirname( __FILE__ ),		
-	'remoteExtPath' => 'BreadCrumbs'		
+# Resource loader
+$wgResourceModules['ext.breadCrumbs'] = array(
+	'styles' => 'BreadCrumbs.css',
+	'localBasePath' => dirname( __FILE__ ),
+	'remoteExtPath' => 'BreadCrumbs'
+);
+
+# Register extension credits:
+$wgExtensionCredits['parserhook'][] = array(
+	'path'           => __FILE__,
+	'name'           => 'BreadCrumbs',
+	'version'		 => '0.3',
+	'author'         => array( 'Manuel Schneider', '[http://milcord.com Tony Boyles, Milcord llc]' ),
+	'url'            => 'https://www.mediawiki.org/wiki/Extension:BreadCrumbs',
+	'descriptionmsg' => 'breadcrumbs-desc',
 );
