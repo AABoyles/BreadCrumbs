@@ -229,14 +229,20 @@ $messages['fi'] = array(
 );
 
 /** French (français)
+ * @author Gomoko
  * @author Peter17
  */
 $messages['fr'] = array(
 	'breadcrumbs-desc' => "Ajoute une suite de liens de navigation sous la barre d'onglets",
+	'prefs-breadcrumbs-separator' => "Séparateur du fil d'Ariane",
 	'prefs-breadcrumbs' => 'Barre de navigation',
 	'prefs-breadcrumbs-showcrumbs' => 'Afficher la barre de navigation',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Nombre de liens de navigation',
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maximum 20 liens de navigation',
+	'prefs-breadcrumbs-location' => "Emplacement du fil d'Ariane",
+	'prefs-breadcrumbs-namespaces' => "Inclure les espaces de noms dans les fils d'Ariane",
+	'prefs-breadcrumbs-filter-duplicates' => 'Filtrer les pages visitées à plusieurs reprises',
+	'prefs-breadcrumbs-preceding-text' => "Texte à afficher devant les fils d'Ariane",
 );
 
 /** Franco-Provençal (arpetan)
@@ -441,9 +447,20 @@ $messages['ko'] = array(
 	'breadcrumbs-desc' => '사용자의 최근 방문 문서 목록을 표시하는 기능',
 );
 
-/** Colognian (Ripoarisch) */
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
 $messages['ksh'] = array(
 	'breadcrumbs-desc' => 'Zeijsch dem Lesser odder Medmaacher der Wääsch dorj_et Wikki, dänn hä jekumme es, op jede Sigg',
+	'prefs-breadcrumbs-separator' => 'Et Zeische zwesche de Jrömmelle',
+	'prefs-breadcrumbs' => 'Bruutjrömmelle',
+	'prefs-breadcrumbs-showcrumbs' => 'Bruutjrommelle aanzeije',
+	'prefs-breadcrumbs-numberofcrumbs' => 'De Aanzahl vun Jrömelle',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Nit mieh wi 20 Jrömmelle',
+	'prefs-breadcrumbs-location' => 'Der Plaaz för de Bruutjrömmelle',
+	'prefs-breadcrumbs-namespaces' => 'Donn de Appachtemangs en de Bruutjrömmele met aanzeije',
+	'prefs-breadcrumbs-filter-duplicates' => 'Donn Sigge bloß eijmohl zeije, ejaal, wi öff mer drop wohr',
+	'prefs-breadcrumbs-preceding-text' => 'Wat vör der Bruutjrömmelle schtonn sull',
 );
 
 /** Cornish (kernowek)
@@ -616,7 +633,7 @@ $messages['pl'] = array(
 $messages['pms'] = array(
 	'breadcrumbs-desc' => 'A gionta com na trassa ëd farin-a sota a la tichëtta dla bara',
 	'prefs-breadcrumbs' => 'Ampovrà ëd farin-a',
-	'prefs-breadcrumbs-showcrumbs' => "Visualisé l'ampovrà",
+	'prefs-breadcrumbs-showcrumbs' => "Visualisé j'ampovrà",
 	'prefs-breadcrumbs-numberofcrumbs' => "Nùmer d'ampovrà",
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'Al pi 20 ampovrà',
 );
@@ -766,10 +783,15 @@ $messages['th'] = array(
  */
 $messages['tl'] = array(
 	'breadcrumbs-desc' => 'Nagdaragdag ng isang bulaos ng mga pispis ng tinapay sa ilalim ng bareta ng panglaylay',
+	'prefs-breadcrumbs-separator' => 'Panghiwalay ng mumo ng tinapay',
 	'prefs-breadcrumbs' => 'Mga Pispis ng tinapay',
 	'prefs-breadcrumbs-showcrumbs' => 'Ipakita ang mga pispis ng tinapay',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Bilang ng mga pispis ng tinapay',
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'Pinakamaraming 20 mga himulmol ng tinapay',
+	'prefs-breadcrumbs-location' => 'Kinalalagyan ng mga mumo ng tinapay',
+	'prefs-breadcrumbs-namespaces' => 'Isama ang mga Pangalan ng Puwang sa loob ng mga Mumo ng Tinapay',
+	'prefs-breadcrumbs-filter-duplicates' => 'Salaing inilalabas ang mga pahinang paulit-ulit na dinadalaw',
+	'prefs-breadcrumbs-preceding-text' => 'Tekstong lilitaw bago ang mga Mumo ng Tinapay',
 );
 
 /** Turkish (Türkçe)
