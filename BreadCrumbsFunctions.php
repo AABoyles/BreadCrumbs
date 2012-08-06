@@ -17,7 +17,7 @@ if (!defined('MEDIAWIKI')) {
 
 function fnBreadCrumbsShowHook(&$article) {
 	global $wgOut, $wgUser, $wgDefaultUserOptions;
-	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory;
+	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory, $wgBreadCrumbsLink;
 
 	$wluOptions = $wgUser -> getOptions();
 	
@@ -70,10 +70,17 @@ function fnBreadCrumbsShowHook(&$article) {
 	for ($i = 1; $i <= $max; $i++) {
 		$j = count($m_BreadCrumbs) - $i;
 		$title = Title::newFromText($m_BreadCrumbs[$j]);
-		if ($wluOptions['breadcrumbs-namespaces']){
-			$breadcrumb = Linker::link($title, $m_BreadCrumbs[$j]);} 
-		else {
-			$breadcrumb = Linker::link($title, $title->getText());}
+		if ($wgBreadCrumbsLink){
+			if ($wluOptions['breadcrumbs-namespaces']){
+				$breadcrumb = Linker::link($title, $m_BreadCrumbs[$j]);} 
+			else {
+				$breadcrumb = Linker::link($title, $title->getText());}
+		}else{
+			if ($wluOptions['breadcrumbs-namespaces']){
+				$breadcrumb = $m_BreadCrumbs[$j];} 
+			else {
+				$breadcrumb = $title->getText();}
+		}
 		$breadcrumbs = $breadcrumb . $breadcrumbs;
 		if ($i < $max) {
 			$breadcrumbs = ' ' . htmlspecialchars($wluOptions['breadcrumbs-delimiter']) . ' ' . $breadcrumbs;
