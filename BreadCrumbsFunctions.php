@@ -71,10 +71,17 @@ function fnBreadCrumbsShowHook(&$article) {
 		$j = count($m_BreadCrumbs) - $i;
 		$title = Title::newFromText($m_BreadCrumbs[$j]);
 		if ($wgBreadCrumbsLink){
-			if ($wluOptions['breadcrumbs-namespaces']){
-				$breadcrumb = Linker::link($title, $m_BreadCrumbs[$j]);} 
-			else {
-				$breadcrumb = Linker::link($title, $title->getText());}
+			if(version_compare(SpecialVersion::getVersion(), '1.18.0')>-1){
+				if ($wluOptions['breadcrumbs-namespaces']){
+					$breadcrumb = Linker::link($title, $m_BreadCrumbs[$j]);} 
+				else {
+					$breadcrumb = Linker::link($title, $title->getText());}
+			}else{
+				if ($wluOptions['breadcrumbs-namespaces']){
+					$breadcrumb = '<a href="'.$title::getFullURL().'">'.$m_BreadCrumbs[$j].'</a>';} 
+				else {
+					$breadcrumb = '<a href="'.$title->getText().'">'.$m_BreadCrumbs[$j].'</a>';} 
+			}
 		}else{
 			if ($wluOptions['breadcrumbs-namespaces']){
 				$breadcrumb = $m_BreadCrumbs[$j];} 
