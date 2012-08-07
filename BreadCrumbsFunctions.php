@@ -80,7 +80,7 @@ function fnBreadCrumbsShowHook(&$article) {
 				if ($wluOptions['breadcrumbs-namespaces']){
 					$breadcrumb = '<a href="'.$title::getFullURL().'">'.$m_BreadCrumbs[$j].'</a>';} 
 				else {
-					$breadcrumb = '<a href="'.$title->getText().'">'.$m_BreadCrumbs[$j].'</a>';} 
+					$breadcrumb = '<a href="'.$title::getFullURL().'">'.$title->getText().'</a>';} 
 			}
 		}else{
 			if ($wluOptions['breadcrumbs-namespaces']){
