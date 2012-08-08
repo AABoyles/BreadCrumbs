@@ -38,7 +38,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	$m_count = count($m_BreadCrumbs);
 
 	# Title string for the page we're viewing
-	$title = $article -> getTitle();// -> getPrefixedText();
+	$title = $article -> getTitle() -> getPrefixedText();
 	
 	# Are there any Breadcrumbs to see?
 	if ($m_count > 0){
