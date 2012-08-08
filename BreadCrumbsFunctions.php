@@ -38,7 +38,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	$m_count = count($m_BreadCrumbs);
 
 	# Title string for the page we're viewing
-	$title = $article -> getTitle() -> getPrefixedText();
+	$title = $article -> getTitle();// -> getPrefixedText();
 	
 	# Are there any Breadcrumbs to see?
 	if ($m_count > 0){
@@ -71,6 +71,7 @@ function fnBreadCrumbsShowHook(&$article) {
 		$j = count($m_BreadCrumbs) - $i;
 		$title = Title::newFromText($m_BreadCrumbs[$j]);
 		if ($wgBreadCrumbsLink){
+			#For whatever reason, the Linker doesn't play nice in Versions before 1.18.0...
 			if(version_compare(SpecialVersion::getVersion(), '1.18.0')>-1){
 				if ($wluOptions['breadcrumbs-namespaces']){
 					$breadcrumb = Linker::link($title, $m_BreadCrumbs[$j]);} 
@@ -78,9 +79,9 @@ function fnBreadCrumbsShowHook(&$article) {
 					$breadcrumb = Linker::link($title, $title->getText());}
 			}else{
 				if ($wluOptions['breadcrumbs-namespaces']){
-					$breadcrumb = '<a href="'.$title::getFullURL().'">'.$m_BreadCrumbs[$j].'</a>';} 
+					$breadcrumb = '<a href="'.$title->getFullURL().'" title="'.$m_BreadCrumbs[$j].'">'.$m_BreadCrumbs[$j].'</a>';} 
 				else {
-					$breadcrumb = '<a href="'.$title::getFullURL().'">'.$title->getText().'</a>';} 
+					$breadcrumb = '<a href="'.$title->getFullURL().'" title="'.$title->getText().'">'.$title->getText().'</a>';} 
 			}
 		}else{
 			if ($wluOptions['breadcrumbs-namespaces']){
@@ -147,7 +148,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 			'type' => 'text',
 			'section' => 'rendering/breadcrumbs',
 			'size' => 34,
-                        'maxlength'=> 30,
+            'maxlength'=> 30,
 			'label-message' => 'prefs-breadcrumbs-preceding-text',
 			'help' => wfMsgHtml( 'prefs-breadcrumbs-preceding-text-max' ),
 		);
@@ -156,7 +157,7 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 			'type' => 'text',
 			'section' => 'rendering/breadcrumbs',
 			'size' => 2,
-                        'maxlength'=> 2,
+            'maxlength'=> 2,
 			'label-message' => 'prefs-breadcrumbs-separator',
 			'help' => wfMsgHtml( 'prefs-breadcrumbs-separator-max' ),
 		);
