@@ -408,9 +408,21 @@ $messages['is'] = array(
 	'breadcrumbs-desc' => 'Sýnir flakk notenda á wiki-síðunni',
 );
 
-/** Italian (italiano) */
+/** Italian (italiano)
+ * @author Darth Kule
+ */
 $messages['it'] = array(
 	'breadcrumbs-desc' => 'Mostra gli utenti il percorso attraverso la wiki',
+	'prefs-breadcrumbs-separator' => 'Separatore delle breadcrumb',
+	'prefs-breadcrumbs-separator-max' => 'Possono essere inseriti al massimo 2 caratteri.',
+	'prefs-breadcrumbs' => 'Breadcrumb',
+	'prefs-breadcrumbs-showcrumbs' => 'Mostra breadcrumb',
+	'prefs-breadcrumbs-numberofcrumbs' => 'Numero di breadcrumb',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Possono essere mostrate al massimo 20 breadcrumb.',
+	'prefs-breadcrumbs-namespaces' => 'Includi i namespace nelle breadcrumbs',
+	'prefs-breadcrumbs-filter-duplicates' => 'Escludi le pagine visitate più volte',
+	'prefs-breadcrumbs-preceding-text' => 'Testo da mostrare prima delle breadcrumb',
+	'prefs-breadcrumbs-preceding-text-max' => 'Possono essere inseriti al massimo 30 caratteri.',
 );
 
 /** Japanese (日本語)
@@ -582,11 +594,11 @@ $messages['ne'] = array(
 $messages['nl'] = array(
 	'breadcrumbs-desc' => 'Voegt een spoor toe van de navigatiegeschiedenis onder de menubalk',
 	'prefs-breadcrumbs-separator' => 'Scheidingsteken voor navigatiegeschiedenis',
-	'prefs-breadcrumbs-separator-max' => 'Er kunnen maximum 2 tekens worden ingevoerd.',
+	'prefs-breadcrumbs-separator-max' => 'Er kunnen maximaal 2 tekens worden ingevoerd.',
 	'prefs-breadcrumbs' => 'Navigatiegeschiedenis',
 	'prefs-breadcrumbs-showcrumbs' => 'Navigatiegeschiedenis weergeven',
 	'prefs-breadcrumbs-numberofcrumbs' => "Aantal weer te geven pagina's in navigatiegeschiedenis",
-	'prefs-breadcrumbs-numberofcrumbs-max' => "Maximaal 20 pagina's weergeven",
+	'prefs-breadcrumbs-numberofcrumbs-max' => "Er worden maximaal 20 pagina's weergeven.",
 	'prefs-breadcrumbs-namespaces' => 'Naamruimten opnemen in navigatiegeschiedenis',
 	'prefs-breadcrumbs-filter-duplicates' => "Herhaaldelijk bezochte pagina's niet opnemen",
 	'prefs-breadcrumbs-preceding-text' => 'Weer te geven tekst voor navigatiegeschiedenis',
