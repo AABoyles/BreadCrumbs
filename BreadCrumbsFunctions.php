@@ -16,23 +16,26 @@ if (!defined('MEDIAWIKI')) {
 }
 
 function fnBreadCrumbsShowHook(&$article) {
-	global $wgOut, $wgUser, $wgDefaultUserOptions;
+	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgRequest, $wgSessionStarted;
 	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory, $wgBreadCrumbsLink;
 
 	$wluOptions = $wgUser -> getOptions();
 	
 	# Should we display breadcrumbs?
-	if ((!$wgBreadCrumbsShowAnons && $wgUser -> isAnon()) || (!$wluOptions['breadcrumbs-showcrumbs'])) {
+	if ((!$wgBreadCrumbsShowAnons && $wgUser -> isAnon()) 
+		|| (!$wluOptions['breadcrumbs-showcrumbs'])) {
 		return true;
 	}
 
-	# deserialize data from session into array:
-	$m_BreadCrumbs = array();
+	# I'm not certain if this is a security issue.  If you have some knowledge on the topic, please let me know!
+	# Drop a line on http://www.mediawiki.org/wiki/Extension_talk:BreadCrumbs  Thanks! -Tony
+	if (! $wgSessionStarted) { wfSetupSession(); }
+
+	# Get our data from session:
+	$m_BreadCrumbs = $wgRequest->getSessionData('BreadCrumbs');
 
 	# if we have breadcrumbs, let's use them:
-	if (isset($_SESSION['BreadCrumbs'])) {
-		$m_BreadCrumbs = $_SESSION['BreadCrumbs'];
-	}
+	if ($m_BreadCrumbs===NULL){ $m_BreadCrumbs = array();}
 
 	# cache index of last element:
 	$m_count = count($m_BreadCrumbs);
@@ -49,7 +52,7 @@ function fnBreadCrumbsShowHook(&$article) {
 				array_push($m_BreadCrumbs, $title);
 			}
 			# serialize data from array to session:
-			$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
+			$wgRequest->setSessionData("BreadCrumbs", $m_BreadCrumbs);
 			# update cache:
 			$m_count++;
 		}
@@ -58,8 +61,7 @@ function fnBreadCrumbsShowHook(&$article) {
 		# add new page:
 		array_push($m_BreadCrumbs, $title);
 		# serialize data from array to session:
-		#TODO: Switch to $wgRequest
-		$_SESSION['BreadCrumbs'] = $m_BreadCrumbs;
+		$wgRequest->setSessionData("BreadCrumbs", $m_BreadCrumbs);
 		# update cache:
 		$m_count++;
 	}

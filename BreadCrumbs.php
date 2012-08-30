@@ -4,7 +4,6 @@
  * to users.
  *
  * @link https://www.mediawiki.org/wiki/Extension:BreadCrumbs Documentation
-
  * @file BreadCrumbs.php
  * @ingroup Extensions
  * @defgroup BreadCrumbs
