@@ -187,10 +187,12 @@ $messages['de'] = array(
  */
 $messages['dsb'] = array(
 	'breadcrumbs-desc' => 'Pśidawa slěd srjodkow pód rejtarkoweju lejstwu',
+	'prefs-breadcrumbs-separator-max' => 'Maksimalnje 2 znamušce dajotej se zapódaś.',
 	'prefs-breadcrumbs' => 'Srjodki',
 	'prefs-breadcrumbs-showcrumbs' => 'Srjodki zwobrazniś',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Licba srjodkow',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maksimalnje 20 srjodkow',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maksimalnje 20 nawigaciskich elementow dajo se pokazaś.',
+	'prefs-breadcrumbs-preceding-text-max' => 'Maksimalnje 30 znamuškow dajo se zapódaś.',
 );
 
 /** Greek (Ελληνικά) */
@@ -282,13 +284,15 @@ $messages['fy'] = array(
 $messages['gl'] = array(
 	'breadcrumbs-desc' => 'Engade un conxunto de ligazóns de navegación baixo a barra de lapelas',
 	'prefs-breadcrumbs-separator' => 'Separador das ligazóns de navegación',
+	'prefs-breadcrumbs-separator-max' => 'Pode inserir un máximo de 2 caracteres.',
 	'prefs-breadcrumbs' => 'Ligazóns de navegación',
 	'prefs-breadcrumbs-showcrumbs' => 'Mostrar as ligazóns de navegación',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Número de ligazóns de navegación',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'Un máximo de 20 ligazóns de navegación',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Pódese mostrar un máximo de 20 ligazóns de navegación.',
 	'prefs-breadcrumbs-namespaces' => 'Incluír os espazos de nomes nas ligazóns de navegación',
 	'prefs-breadcrumbs-filter-duplicates' => 'Excluír as páxinas visitadas a miúdo',
 	'prefs-breadcrumbs-preceding-text' => 'Texto a mostrar antes das ligazóns de navegación',
+	'prefs-breadcrumbs-preceding-text-max' => 'Pode inserir un máximo de 30 caracteres.',
 );
 
 /** Ancient Greek (Ἀρχαία ἑλληνικὴ) */
@@ -317,10 +321,16 @@ $messages['gv'] = array(
  */
 $messages['he'] = array(
 	'breadcrumbs-desc' => 'הוספת שביל פירורי לחם תחת סרגל הלשוניות',
+	'prefs-breadcrumbs-separator' => 'תו מפריד לפירורי לחם',
+	'prefs-breadcrumbs-separator-max' => 'אפשר להזין 2 תווים לכל היותר',
 	'prefs-breadcrumbs' => 'פירורי לחם',
 	'prefs-breadcrumbs-showcrumbs' => 'להציג פירורי לחם',
 	'prefs-breadcrumbs-numberofcrumbs' => 'מספר פירורי הלחם',
-	'prefs-breadcrumbs-numberofcrumbs-max' => '20 פירורי לחם לכל היותר',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'אפשר להציג 20 פירורי לחם לכל היותר',
+	'prefs-breadcrumbs-namespaces' => 'לכלול את מרחב השם בפירורי לחם',
+	'prefs-breadcrumbs-filter-duplicates' => ' לסנן דפים שחוזרים על עצמם הרבה',
+	'prefs-breadcrumbs-preceding-text' => 'טקסט שיופיע לפני פירורי הלחם',
+	'prefs-breadcrumbs-preceding-text-max' => 'אפשר להזין לכל היותר 30 תווים.',
 );
 
 /** Hindi (हिन्दी)
@@ -346,13 +356,15 @@ $messages['hr'] = array(
 $messages['hsb'] = array(
 	'breadcrumbs-desc' => 'Přidawa slěd srjódkow pod rajtarkowej lajstu',
 	'prefs-breadcrumbs-separator' => 'Dźělatko',
+	'prefs-breadcrumbs-separator-max' => 'Maksimalnje 2 znamješce datej so zapodać.',
 	'prefs-breadcrumbs' => 'Srjódki',
 	'prefs-breadcrumbs-showcrumbs' => 'Srjódki zwobraznić',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Ličba srjódkow',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maksimalnje 20 srjódkow',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maksimalnje 20 nawigaciskich elementow da so pokazać.',
 	'prefs-breadcrumbs-namespaces' => 'Mjenowe rumy zajimać',
 	'prefs-breadcrumbs-filter-duplicates' => 'Wospjet wopytane strony wufiltrować',
 	'prefs-breadcrumbs-preceding-text' => 'Tekst, kotrež ma so před zapiskami pokazać',
+	'prefs-breadcrumbs-preceding-text-max' => 'Maksimalnje 30 znamješkow da so zapodać.',
 );
 
 /** Hungarian (magyar)
@@ -430,15 +442,17 @@ $messages['it'] = array(
  * @author 青子守歌
  */
 $messages['ja'] = array(
-	'breadcrumbs-desc' => 'パンくずリストをタブバーの下に追加する',
+	'breadcrumbs-desc' => 'パンくずリストをページに追加する',
 	'prefs-breadcrumbs-separator' => 'パンくずリスト内の区切り',
+	'prefs-breadcrumbs-separator-max' => '最大 2 文字が入力されます。',
 	'prefs-breadcrumbs' => 'パンくずリスト',
 	'prefs-breadcrumbs-showcrumbs' => 'パンくずリストを表示',
 	'prefs-breadcrumbs-numberofcrumbs' => 'パンくずリストの項目数',
-	'prefs-breadcrumbs-numberofcrumbs-max' => '最大 20 個のパンくずリスト項目',
+	'prefs-breadcrumbs-numberofcrumbs-max' => '最大 20 個のパンくずリスト項目が表示されます。',
 	'prefs-breadcrumbs-namespaces' => 'パンくずリストに名前空間を含める',
 	'prefs-breadcrumbs-filter-duplicates' => '繰り返し訪れたページを除外する',
 	'prefs-breadcrumbs-preceding-text' => 'パンくずリストの前に表示する文字列',
+	'prefs-breadcrumbs-preceding-text-max' => '最大 30 文字が入力されます。',
 );
 
 /** Jamaican Creole English (Patois)
@@ -502,7 +516,8 @@ $messages['lb'] = array(
 	'prefs-breadcrumbs' => 'Navigatiounslinken (bread crumbs)',
 	'prefs-breadcrumbs-showcrumbs' => 'Navigatiounslinken (bread crumbs) weisen',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Zuel vun den Navigatiounslinken (bread crumbs)',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maximal 20 Navigatiounslinken',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maximal 20 Navigatiounslinken kënne gewise ginn.',
+	'prefs-breadcrumbs-filter-duplicates' => 'Dacks besichte Säiten erausfilteren',
 );
 
 /** Limburgish (Limburgs) */
@@ -537,13 +552,15 @@ $messages['mg'] = array(
 $messages['mk'] = array(
 	'breadcrumbs-desc' => 'Додава траги од трошки под лентата со јазичиња',
 	'prefs-breadcrumbs-separator' => 'Одделувач на навигациската патека',
+	'prefs-breadcrumbs-separator-max' => 'Можете да внесете највеќе 2 знака.',
 	'prefs-breadcrumbs' => 'Трошки',
 	'prefs-breadcrumbs-showcrumbs' => 'Прикажувај трошки',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Број на трошки',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'Највеќе до 20 трошки',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Се прикажуваат највеќе 20 трошки.',
 	'prefs-breadcrumbs-namespaces' => 'Вклучи именски простори во Навигациски патеки',
 	'prefs-breadcrumbs-filter-duplicates' => 'Филтрирање (изземање) на често посетувани страници',
 	'prefs-breadcrumbs-preceding-text' => 'Текст што ќе стои пред Навигациската патека',
+	'prefs-breadcrumbs-preceding-text-max' => 'Можете да внесете највеќе 30 знаци.',
 );
 
 /** Marathi (मराठी) */
@@ -556,6 +573,23 @@ $messages['mr'] = array(
  */
 $messages['ms'] = array(
 	'breadcrumbs-desc' => 'Menunjukkan laluan melalui wiki kepada pengguna',
+);
+
+/** Maltese (Malti)
+ * @author Chrisportelli
+ */
+$messages['mt'] = array(
+	'breadcrumbs-desc' => "Turi lill-utenti ħoloq ta' navigazzjoni",
+	'prefs-breadcrumbs-separator' => "Separatur tal-ħoloq ta' navigazzjoni",
+	'prefs-breadcrumbs-separator-max' => "Jistgħu jiddaħħlu massimu ta' 2 karattri.",
+	'prefs-breadcrumbs' => "Strixxa ta' navigazzjoni",
+	'prefs-breadcrumbs-showcrumbs' => "Uri l-istrixxa ta' navigazzjoni",
+	'prefs-breadcrumbs-numberofcrumbs' => "Numru ta' ħoloq ta' navigazzjoni",
+	'prefs-breadcrumbs-numberofcrumbs-max' => "Jistgħu jidhru massimu ta' 20 ħolqa ta' navigazzjoni.",
+	'prefs-breadcrumbs-namespaces' => "Inkludi l-ispazji tal-isem fil-ħoloq ta' navigazzjoni",
+	'prefs-breadcrumbs-filter-duplicates' => 'Eskldui l-paġni miżjura ħafna drabi',
+	'prefs-breadcrumbs-preceding-text' => "Test x'jintwera qabel l-istrixxa ta' navigazzjoni",
+	'prefs-breadcrumbs-preceding-text-max' => "Jistgħu jiddaħħlu massimu ta' 30 karattru.",
 );
 
 /** Nahuatl (Nāhuatl) */
@@ -651,10 +685,12 @@ $messages['pdt'] = array(
  */
 $messages['pl'] = array(
 	'breadcrumbs-desc' => 'Dodaje szlak nawigacyjny poniżej paska zakładek',
+	'prefs-breadcrumbs-separator-max' => 'Można wpisać maksymalnie 2 znaki.',
 	'prefs-breadcrumbs' => 'Ścieżka hiperłączy',
 	'prefs-breadcrumbs-showcrumbs' => 'Wyświetl ścieżkę hiperłączy',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Liczba hiperłączy w ścieżce',
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'Maksymalnie 20 hiperłączy w ścieżce.',
+	'prefs-breadcrumbs-preceding-text-max' => 'Można wpisać maksymalnie 30 znaków.',
 );
 
 /** Piedmontese (Piemontèis)
@@ -673,11 +709,17 @@ $messages['pms'] = array(
  * @author Hamilton Abreu
  */
 $messages['pt'] = array(
-	'breadcrumbs-desc' => 'Adiciona o percurso até a página corrente, por baixo da barra de separadores',
+	'breadcrumbs-desc' => 'Adiciona o percurso de navegação até a página corrente',
+	'prefs-breadcrumbs-separator' => 'Separador do percurso de navegação',
+	'prefs-breadcrumbs-separator-max' => 'Pode introduzir um máximo de 2 caracteres.',
 	'prefs-breadcrumbs' => 'Percurso de Navegação',
-	'prefs-breadcrumbs-showcrumbs' => 'Mostrar percurso de navegação',
+	'prefs-breadcrumbs-showcrumbs' => 'Mostrar o percurso de navegação',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Número de passos',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'No máximo 20 passos',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Pode ser apresentado um máximo de 20 passos.',
+	'prefs-breadcrumbs-namespaces' => 'Incluir os espaços nominais no percurso de navegação',
+	'prefs-breadcrumbs-filter-duplicates' => 'Excluir as páginas visitadas com frequência',
+	'prefs-breadcrumbs-preceding-text' => 'Texto a mostrar antes do percurso de navegação',
+	'prefs-breadcrumbs-preceding-text-max' => 'Pode introduzir um máximo de 30 caracteres.',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -820,13 +862,15 @@ $messages['th'] = array(
 $messages['tl'] = array(
 	'breadcrumbs-desc' => 'Nagdaragdag ng isang bulaos ng mga pispis ng tinapay sa ilalim ng bareta ng panglaylay',
 	'prefs-breadcrumbs-separator' => 'Panghiwalay ng mumo ng tinapay',
+	'prefs-breadcrumbs-separator-max' => 'Maaaring magpasok ng isang pinaka mataas na 2 mga panitik.',
 	'prefs-breadcrumbs' => 'Mga Pispis ng tinapay',
 	'prefs-breadcrumbs-showcrumbs' => 'Ipakita ang mga pispis ng tinapay',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Bilang ng mga pispis ng tinapay',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'Pinakamaraming 20 mga himulmol ng tinapay',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Makapagpapakita ng isang pinaka mataas na ang 20 mga himulmol ng tinapay',
 	'prefs-breadcrumbs-namespaces' => 'Isama ang mga Pangalan ng Puwang sa loob ng mga Mumo ng Tinapay',
 	'prefs-breadcrumbs-filter-duplicates' => 'Salaing inilalabas ang mga pahinang paulit-ulit na dinadalaw',
 	'prefs-breadcrumbs-preceding-text' => 'Tekstong lilitaw bago ang mga Mumo ng Tinapay',
+	'prefs-breadcrumbs-preceding-text-max' => 'Maaaring magpasok ng isang pinaka mataas na 30 mga panitik.',
 );
 
 /** Turkish (Türkçe)
