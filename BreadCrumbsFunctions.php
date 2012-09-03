@@ -16,7 +16,7 @@ if (!defined('MEDIAWIKI')) {
 }
 
 function fnBreadCrumbsShowHook(&$article) {
-	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgRequest, $wgSessionStarted;
+	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgRequest;
 	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory, $wgBreadCrumbsLink;
 
 	$wluOptions = $wgUser -> getOptions();
@@ -27,11 +27,10 @@ function fnBreadCrumbsShowHook(&$article) {
 		return true;
 	}
 
-	# I'm not certain if this is a security issue.  If you have some knowledge on the topic, please let me know!
-	# Drop a line on http://www.mediawiki.org/wiki/Extension_talk:BreadCrumbs  Thanks! -Tony
-	if (! $wgSessionStarted) { wfSetupSession(); }
+	# If we are Anons and should see breadcrumbs, but there's no session, let's start one so we can track from page-to-page
+	if ( session_id() === "" ) { wfSetupSession(); }
 
-	# Get our data from session:
+	# Get our data from $_SESSION:
 	$m_BreadCrumbs = $wgRequest->getSessionData('BreadCrumbs');
 
 	# if we have breadcrumbs, let's use them:
