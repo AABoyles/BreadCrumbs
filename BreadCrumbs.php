@@ -45,7 +45,7 @@ $wgDefaultUserOptions['breadcrumbs-delimiter'] = '>';
 # $wgBreadCrumbsCount - number of breadcrumbs to use
 $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
 
-# Whether to show the breadcrumbs' namesoaces
+# Whether to show the breadcrumbs' namespaces
 $wgDefaultUserOptions['breadcrumbs-namespaces'] = true;
 
 # Whether to ignore pages that are already in breadcrumbs
@@ -63,6 +63,8 @@ $wgBreadCrumbsLink = true;
 # Text to appear before breadcrumbs
 $wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
 
+# If you don't want certain Namespaces recorded, add them here:
+$wgBreadCrumbsIgnoreNameSpaces = array();
 
 # Hooks:
 
