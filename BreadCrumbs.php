@@ -69,7 +69,7 @@ $wgBreadCrumbsIgnoreNameSpaces = array();
 # Hooks:
 
 # Load BreadCrumbs when viewing article header
-$wgHooks['OutputPageParserOutput'][] = 'fnBreadCrumbsShowHook';
+$wgHooks['BeforePageDisplay'][] = 'fnBreadCrumbsShowHook';
 
 # When presenting options to users, add BreadCrumbs configurations
 $wgHooks['GetPreferences'][] = 'fnBreadCrumbsAddPreferences';
