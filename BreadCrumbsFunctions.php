@@ -15,8 +15,8 @@ if (!defined('MEDIAWIKI')) {
 	die();
 }
 
-function fnBreadCrumbsShowHook(&$article) {
-	global $wgOut, $wgUser, $wgDefaultUserOptions, $wgRequest;
+function fnBreadCrumbsShowHook($wgOut, $parseroutput) {
+	global $wgUser, $wgDefaultUserOptions, $wgRequest;
 	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory, $wgBreadCrumbsLink;
 
 	$wluOptions = $wgUser -> getOptions();
@@ -40,7 +40,7 @@ function fnBreadCrumbsShowHook(&$article) {
 	$m_count = count($m_BreadCrumbs);
 
 	# Title string for the page we're viewing
-	$title = $article -> getTitle() -> getPrefixedText();
+	$title = $wgOut -> getTitle() -> getPrefixedText();
 	
 	# Are there any Breadcrumbs to see?
 	if ($m_count > 0){

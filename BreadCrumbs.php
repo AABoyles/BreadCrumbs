@@ -67,7 +67,7 @@ $wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
 # Hooks:
 
 # Load BreadCrumbs when viewing article header
-$wgHooks['ArticleViewHeader'][] = 'fnBreadCrumbsShowHook';
+$wgHooks['OutputPageParserOutput'][] = 'fnBreadCrumbsShowHook';
 
 # When presenting options to users, add BreadCrumbs configurations
 $wgHooks['GetPreferences'][] = 'fnBreadCrumbsAddPreferences';
