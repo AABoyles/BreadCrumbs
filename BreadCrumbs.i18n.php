@@ -33,20 +33,21 @@ $messages['en'] = array(
 /** Message documentation (Message documentation)
  * @author Kghbln
  * @author Purodha
+ * @author Shirayuki
  * @author The Evil IP address
  */
 $messages['qqq'] = array(
 	'breadcrumbs-desc' => '{{desc}}',
 	'prefs-breadcrumbs-separator' => 'This is a user preference option (text field) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may enter the separator to be used between the breadcrumbs.',
-	'prefs-breadcrumbs-separator-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining how many characters may be entered as the separator to be used between breadcrumbs.',
+	'prefs-breadcrumbs-separator-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining how many characters may be entered as {{msg-mw|Prefs-breadcrumbs-separator}}.',
 	'prefs-breadcrumbs' => 'This is the section header on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]] containing the user preference options for this extension.',
 	'prefs-breadcrumbs-showcrumbs' => 'This is a user preference option (check box) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may choose whether to use breadcrumbs or not.',
 	'prefs-breadcrumbs-numberofcrumbs' => 'This is a user preference option (text field) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may enter the number of breadcrumbs to show in the breadcrumbs trail.',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining which values may be entered for the related user preference option.',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining which values may be entered for the option {{msg-mw|Prefs-breadcrumbs-numberofcrumbs}}.',
 	'prefs-breadcrumbs-namespaces' => 'This is a user preference option (check box) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may choose whether the namespace of the pages within the breadcrumbs trail should be shown or not.',
 	'prefs-breadcrumbs-filter-duplicates' => 'This is a user preference option (check box) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may choose whether repeatedly-visited pages should be shown in the breadcrumbs trail or not.',
 	'prefs-breadcrumbs-preceding-text' => 'This is a user preference option (text field) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may enter a text that should be printed in front of the breadcrumbs trail.',
-	'prefs-breadcrumbs-preceding-text-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining how many characters may be entered as preceding text in front of the breadcrumbs trail.',
+	'prefs-breadcrumbs-preceding-text-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining how many characters may be entered as {{msg-mw|Prefs-breadcrumbs-preceding-text}}.',
 );
 
 /** Afrikaans (Afrikaans)
@@ -180,6 +181,13 @@ $messages['de'] = array(
 	'prefs-breadcrumbs-filter-duplicates' => 'Bereits aufgesuchte Seiten nicht erneut anzeigen',
 	'prefs-breadcrumbs-preceding-text' => 'Vor dem Navigationsweg anzuzeigender Text:',
 	'prefs-breadcrumbs-preceding-text-max' => 'Maximal 30 Zeichen können, als vor dem Navigationsweg anzuzeigender Text, angegeben werden.',
+);
+
+/** Zazaki (Zazaki)
+ * @author Erdemaslancan
+ */
+$messages['diq'] = array(
+	'breadcrumbs-desc' => 'Wiki de heruna karberan mocneno',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -443,16 +451,16 @@ $messages['it'] = array(
  */
 $messages['ja'] = array(
 	'breadcrumbs-desc' => 'パンくずリストをページに追加する',
-	'prefs-breadcrumbs-separator' => 'パンくずリスト内の区切り',
-	'prefs-breadcrumbs-separator-max' => '最大 2 文字が入力されます。',
+	'prefs-breadcrumbs-separator' => 'パンくずリストの項目間の区切り',
+	'prefs-breadcrumbs-separator-max' => '2 文字まで入力できます。',
 	'prefs-breadcrumbs' => 'パンくずリスト',
 	'prefs-breadcrumbs-showcrumbs' => 'パンくずリストを表示',
 	'prefs-breadcrumbs-numberofcrumbs' => 'パンくずリストの項目数',
-	'prefs-breadcrumbs-numberofcrumbs-max' => '最大 20 個のパンくずリスト項目が表示されます。',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'パンくずリストの項目数は最大 20 です。',
 	'prefs-breadcrumbs-namespaces' => 'パンくずリストに名前空間を含める',
-	'prefs-breadcrumbs-filter-duplicates' => '繰り返し訪れたページを除外する',
+	'prefs-breadcrumbs-filter-duplicates' => '繰り返し訪れたページを除外',
 	'prefs-breadcrumbs-preceding-text' => 'パンくずリストの前に表示する文字列',
-	'prefs-breadcrumbs-preceding-text-max' => '最大 30 文字が入力されます。',
+	'prefs-breadcrumbs-preceding-text-max' => '30 文字まで入力できます。',
 );
 
 /** Jamaican Creole English (Patois)
@@ -492,13 +500,15 @@ $messages['ko'] = array(
 $messages['ksh'] = array(
 	'breadcrumbs-desc' => 'Zeijsch dem Lesser odder Medmaacher der Wääsch dorj_et Wikki, dänn hä jekumme es, op jede Sigg',
 	'prefs-breadcrumbs-separator' => 'Et Zeische zwesche de Jrömmelle',
+	'prefs-breadcrumbs-separator-max' => 'Nit mieh wi zwei Zeische!',
 	'prefs-breadcrumbs' => 'Bruutjrömmelle',
 	'prefs-breadcrumbs-showcrumbs' => 'Bruutjrommelle aanzeije',
 	'prefs-breadcrumbs-numberofcrumbs' => 'De Aanzahl vun Jrömelle',
-	'prefs-breadcrumbs-numberofcrumbs-max' => 'Nit mieh wi 20 Jrömmelle',
+	'prefs-breadcrumbs-numberofcrumbs-max' => 'Nit mieh wi 20 Jrömmelle künne jezeisch wääde.',
 	'prefs-breadcrumbs-namespaces' => 'Donn de Appachtemangs en de Bruutjrömmele met aanzeije',
 	'prefs-breadcrumbs-filter-duplicates' => 'Donn Sigge bloß eijmohl zeije, ejaal, wi öff mer drop wohr',
 	'prefs-breadcrumbs-preceding-text' => 'Wat vör der Bruutjrömmelle schtonn sull',
+	'prefs-breadcrumbs-preceding-text-max' => 'Nit mieh wi drißßesch Zeische!',
 );
 
 /** Cornish (kernowek)
