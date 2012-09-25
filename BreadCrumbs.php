@@ -66,6 +66,9 @@ $wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
 # If you don't want certain Namespaces recorded, add them here:
 $wgBreadCrumbsIgnoreNameSpaces = array();
 
+# If you don't want certain pages recorded, add them here:
+$wgBreadCrumbsIgnorePages = array('Undefined/firebug.html');
+
 # Hooks:
 
 # Load BreadCrumbs when viewing article header
