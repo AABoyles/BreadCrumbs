@@ -1,7 +1,7 @@
 BreadCrumbs
 ===========
 
-A Mediawiki Extension to provide a user-browsing history breadcrumb 
+A Mediawiki Extension to provide a user-browsing history breadcrumb
 trail on wiki pages.
 
 
@@ -17,38 +17,45 @@ LocalSettings.php file (near the end):
 
 PARAMETERS/APPEARANCE
 --------------------------------------------------------------------------
+To customize the behavior of the breadcrumb trail, there are several
+options available to administrators:
 
-To customize the design of the breadcrumb trail, there are several user-
-accessible options (default values given):
+    # Whether to provide the links also for anonymous users:
+    $wgBreadCrumbsShowAnons = true;
+
+    # $wgBreadCrumbsAllowUPOs - Should users be allowed to configure
+    #  BreadCrumbs Options?
+    $wgBreadCrumbsAllowUPOs = true;
+
+    # If you don't want certain Namespaces recorded, add them here:
+    $wgBreadCrumbsIgnoreNameSpaces = array();
+
+
+Additionally, there are several user-accessible options which can be
+modified from [[Special:Preferences/Appearance#BreadCrumbs]] (default
+values given):
 
     # Whether to provide breadcrumbs to users by default
     $wgDefaultUserOptions['breadcrumbs-showcrumbs'] = true;
 
-    # Delimiter string between BreadCrumbs
-    $wgDefaultUserOptions['breadcrumbs-delimiter'] = '>';
-
-    # Number of breadcrumbs to show
-    $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
+    # Text to appear before breadcrumbs
+    $wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
 
     # Whether to show the breadcrumbs' namespaces
     $wgDefaultUserOptions['breadcrumbs-namespaces'] = true;
 
+    # $wgBreadCrumbsDelimiter - set the delimiter
+    $wgDefaultUserOptions['breadcrumbs-delimiter'] = '>';
+
+    # $wgBreadCrumbsCount - number of breadcrumbs to use
+    $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
+
     # Whether to ignore pages that are already in breadcrumbs
     $wgDefaultUserOptions['breadcrumbs-filter-duplicates'] = false;
 
-    # Text to appear before breadcrumbs
-    $wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
-
-Additionally, there are some configurations available to administrators
-
     # Whether to ignore page refreshes
-    $wgBreadCrumbsIgnoreRefreshes = true;
+    $wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] = true;
 
-    # Whether to provide the links also for anonymous users
-    $wgBreadCrumbsShowAnons = false;
-    
-    # Whether users should be allowed to configure BreadCrumbs Options
-    $wgBreadCrumbsAllowUPOs = true;
 
 Any of these may be overridden in LocalSettings.php.
 
@@ -59,7 +66,8 @@ BUGS, CONTACT
 Write us on http://www.mediawiki.org/wiki/Extension_talk:BreadCrumbs and
 we'll see what we can do for you.
 
-Alternatively you can reach me (Tony Boyles) [by e-mail](mailto:ABoyles@milcord.com)
+Alternatively you can reach me (Tony Boyles)
+[by e-mail](mailto:ABoyles@milcord.com)
 
 The description page of this extension can be found at:
 http://www.mediawiki.org/wiki/Extension:BreadCrumbs
