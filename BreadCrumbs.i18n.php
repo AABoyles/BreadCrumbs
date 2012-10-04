@@ -18,14 +18,15 @@ $messages = array();
  */
 $messages['en'] = array(
 	'breadcrumbs-desc' => 'Adds a trail of bread crumbs to the page',
-	'prefs-breadcrumbs-separator' => 'Bread crumb separator',
+	'prefs-breadcrumbs-separator' => 'BreadCrumb separator',
 	'prefs-breadcrumbs-separator-max' => 'A maximum 2 characters may be entered.',
-	'prefs-breadcrumbs' => 'Bread Crumbs',
-	'prefs-breadcrumbs-showcrumbs' => 'Display bread crumbs',
+	'prefs-breadcrumbs' => 'BreadCrumbs',
+	'prefs-breadcrumbs-showcrumbs' => 'Display BreadCrumbs',
 	'prefs-breadcrumbs-numberofcrumbs' => 'Number of bread crumbs',
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'A maximum 20 bread crumbs may be shown.',
 	'prefs-breadcrumbs-namespaces' => 'Include Namespaces in bread crumbs',
 	'prefs-breadcrumbs-filter-duplicates' => 'Filter out repeatedly-visited pages',
+	'prefs-breadcrumbs-ignore-refreshes' => 'Filter out page refreshes',
 	'prefs-breadcrumbs-preceding-text' => 'Text to appear before bread crumbs',
 	'prefs-breadcrumbs-preceding-text-max' => 'A maximum 30 characters may be entered.',
 );
@@ -46,6 +47,7 @@ $messages['qqq'] = array(
 	'prefs-breadcrumbs-numberofcrumbs-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining which values may be entered for the option {{msg-mw|Prefs-breadcrumbs-numberofcrumbs}}.',
 	'prefs-breadcrumbs-namespaces' => 'This is a user preference option (check box) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may choose whether the namespace of the pages within the breadcrumbs trail should be shown or not.',
 	'prefs-breadcrumbs-filter-duplicates' => 'This is a user preference option (check box) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may choose whether repeatedly-visited pages should be shown in the breadcrumbs trail or not.',
+	'prefs-breadcrumbs-ignore-refreshes' => 'This is a user preference option (check box) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may choose whether page refreshes should be shown in the breadcrumbs trail or not.',
 	'prefs-breadcrumbs-preceding-text' => 'This is a user preference option (text field) appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]]. The user may enter a text that should be printed in front of the breadcrumbs trail.',
 	'prefs-breadcrumbs-preceding-text-max' => 'This is an information message appearing on [[Special:Preferences#mw-prefsection-rendering|Special:Preferences / Appearance]], explaining how many characters may be entered as {{msg-mw|Prefs-breadcrumbs-preceding-text}}.',
 );

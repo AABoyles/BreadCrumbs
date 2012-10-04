@@ -23,15 +23,12 @@ $wgExtensionCredits['other'][] = array(
 	'path'           => __FILE__,
 	'name'           => 'BreadCrumbs',
 	'descriptionmsg' => 'breadcrumbs-desc',
-	'version'	 => '0.3.1',
+	'version'	 => '0.4.0',
 	'author'         => array( 'Manuel Schneider', '[http://milcord.com Tony Boyles, Milcord llc]' ),
 	'url'            => 'https://www.mediawiki.org/wiki/Extension:BreadCrumbs',
 );
 
 # Default Options:
-
-# Whether to provide breadcrumbs to users by default
-$wgDefaultUserOptions['breadcrumbs-showcrumbs'] = true;
 
 # Whether to provide the links also for anonymous users:
 $wgBreadCrumbsShowAnons = true;
@@ -39,32 +36,30 @@ $wgBreadCrumbsShowAnons = true;
 # $wgBreadCrumbsAllowUPOs - Should users be allowed to configure BreadCrumbs Options?
 $wgBreadCrumbsAllowUPOs = true;
 
+# Whether to provide breadcrumbs to users by default
+$wgDefaultUserOptions['breadcrumbs-showcrumbs'] = true;
+
+# Text to appear before breadcrumbs
+$wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
+
+# Whether to show the breadcrumbs' namespaces
+$wgDefaultUserOptions['breadcrumbs-namespaces'] = true;
+
 # $wgBreadCrumbsDelimiter - set the delimiter
 $wgDefaultUserOptions['breadcrumbs-delimiter'] = '>';
 
 # $wgBreadCrumbsCount - number of breadcrumbs to use
 $wgDefaultUserOptions['breadcrumbs-numberofcrumbs'] = 5;
 
-# Whether to show the breadcrumbs' namespaces
-$wgDefaultUserOptions['breadcrumbs-namespaces'] = true;
-
 # Whether to ignore pages that are already in breadcrumbs
 $wgDefaultUserOptions['breadcrumbs-filter-duplicates'] = false;
 
 # Whether to ignore page refreshes
-$wgBreadCrumbsIgnoreRefreshes = true;
-
-# Whether to rearrange history - Not yet used
-$wgBreadCrumbsRearrangeHistory = false;
-
-# Whether to link our breadcrumbs
-$wgBreadCrumbsLink = true;
-
-# Text to appear before breadcrumbs
-$wgDefaultUserOptions['breadcrumbs-preceding-text'] = '';
+$wgDefaultUserOptions['breadcrumbs-ignore-refreshes'] = true;
 
 # If you don't want certain Namespaces recorded, add them here:
 $wgBreadCrumbsIgnoreNameSpaces = array();
+
 
 # Hooks:
 
@@ -82,11 +77,3 @@ $wgExtensionMessagesFiles['Breadcrumbs'] = dirname( __FILE__ ) . '/BreadCrumbs.i
 
 # Load the file containing the hook functions:
 require_once( 'BreadCrumbsFunctions.php' );
-
-# Resource loader
-$wgResourceModules['ext.breadCrumbs'] = array(
-	'styles' => 'BreadCrumbs.css',
-	'localBasePath' => dirname( __FILE__ ),
-	'remoteExtPath' => 'BreadCrumbs'
-);
-

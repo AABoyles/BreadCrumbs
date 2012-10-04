@@ -1,5 +1,4 @@
 <?php
-
 /* The BreadCrumbs extension, an extension for providing a breadcrumbs navigation
  * to users.
  *
@@ -17,101 +16,75 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 function fnBreadCrumbsShowHook( $wgOut, $parseroutput ) {
 	global $wgUser, $wgDefaultUserOptions, $wgRequest;
-	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory, $wgBreadCrumbsLink, $wgBreadCrumbsIgnoreNameSpaces;
+	global $wgBreadCrumbsShowAnons,
+			$wgBreadCrumbsIgnoreRefreshes,
+			$wgBreadCrumbsRearrangeHistory,
+			$wgBreadCrumbsLink,
+			$wgBreadCrumbsIgnoreNameSpaces;
 
 	$wluOptions = $wgUser -> getOptions();
 
-	# Should we display breadcrumbs?
-	if ( ( !$wgBreadCrumbsShowAnons && $wgUser -> isAnon() ) || ( !$wluOptions['breadcrumbs-showcrumbs'] ) ) {
-		return true;
-	}
-
 	# If we are Anons and should see breadcrumbs, but there's no session, let's start one so we can track from page-to-page
-	if ( session_id() === "" ) { wfSetupSession();
+	if ( session_id() === "" ) {
+		wfSetupSession();
 	}
 
 	# Get our data from $_SESSION:
 	$m_BreadCrumbs = $wgRequest -> getSessionData( 'BreadCrumbs' );
 
 	# if we have breadcrumbs, let's use them:
-	if ( $m_BreadCrumbs === NULL ) { $m_BreadCrumbs = array();
+	if ( $m_BreadCrumbs === NULL ) {
+		$m_BreadCrumbs = array();
 	}
 
-	# cache index of last element:
+	# add new page:
+	$m_BreadCrumbs[] = $wgOut -> getTitle() -> getPrefixedText();
+
+	# serialize data from array to session:
+	$wgRequest -> setSessionData( "BreadCrumbs", $m_BreadCrumbs );
+
+	# cache number of elements:
 	$m_count = count( $m_BreadCrumbs );
 
-	# Title string for the page we're viewing
-	$title = $wgOut -> getTitle() -> getPrefixedText();
-
-	# Are there any Breadcrumbs to see?
-	if ( $m_count > 0 ) {
-		# Was this a page refresh and do we care?
-		if ( !( $wgBreadCrumbsIgnoreRefreshes && strcmp( $title, $m_BreadCrumbs[$m_count - 1] ) == 0 ) ) {
-			if ( !$wluOptions['breadcrumbs-filter-duplicates'] || !in_array( $title, $m_BreadCrumbs ) ) {
-				array_push( $m_BreadCrumbs, $title );
-			}
-			# serialize data from array to session:
-			$wgRequest -> setSessionData( "BreadCrumbs", $m_BreadCrumbs );
-			# update cache:
-			$m_count++;
-		}
-		# If there aren't any breadcrumbs, we still want to add to the current page to the list.
-	} else {
-		# add new page:
-		array_push( $m_BreadCrumbs, $title );
-		# serialize data from array to session:
-		$wgRequest -> setSessionData( "BreadCrumbs", $m_BreadCrumbs );
-		# update cache:
-		$m_count++;
-	}
-
-	# Build the breadcrumbs trail:
-	$breadcrumbs = '';
-	$max = min( array( $wluOptions['breadcrumbs-numberofcrumbs'], count( $m_BreadCrumbs ) ) );
-	for ( $i = 1; $i <= $max; $i++ ) {
-		$j = count( $m_BreadCrumbs ) - $i;
-		$title = Title::newFromText( $m_BreadCrumbs[$j] );
-		if ( !in_array( $title -> getNsText(), $wgBreadCrumbsIgnoreNameSpaces ) ) {
-			if ( $wgBreadCrumbsLink ) {
-				# For whatever reason, the Linker doesn't play nice in Versions before 1.18.0...
-				if ( version_compare( SpecialVersion::getVersion(), '1.18.0' ) > -1 ) {
-					if ( $wluOptions['breadcrumbs-namespaces'] ) {
-						$breadcrumb = Linker::link( $title, $m_BreadCrumbs[$j] );
-					} else {
-						$breadcrumb = Linker::link( $title, $title -> getText() );
-					}
-				} else {
-					if ( $wluOptions['breadcrumbs-namespaces'] ) {
-						$breadcrumb = '<a href="' . $title -> getFullURL() . '" title="' . $m_BreadCrumbs[$j] . '">' . $m_BreadCrumbs[$j] . '</a>';
-					} else {
-						$breadcrumb = '<a href="' . $title -> getFullURL() . '" title="' . $title -> getText() . '">' . $title -> getText() . '</a>';
-					}
-				}
-			} else {
+	# Should we build the breadcrumbs trail?
+	if ( $wluOptions['breadcrumbs-showcrumbs'] || ( $wgBreadCrumbsShowAnons && $wgUser -> isAnon() ) ) {
+		$breadcrumbs = array();
+		$max = min( array( $wluOptions['breadcrumbs-numberofcrumbs'], $m_count ) );
+		for ( $i = 1; count( $breadcrumbs ) < $max; $i++ ) {
+			$j = $m_count - $i;
+			$title = Title::newFromText( $m_BreadCrumbs[$j] );
+			if ( !in_array( $title -> getNsText(), $wgBreadCrumbsIgnoreNameSpaces ) ) {
 				if ( $wluOptions['breadcrumbs-namespaces'] ) {
-					$breadcrumb = $m_BreadCrumbs[$j];
+					$breadcrumb = Linker::link( $title, $m_BreadCrumbs[$j] );
 				} else {
-					$breadcrumb = $title -> getText();
+					$breadcrumb = Linker::link( $title, $title -> getText() );
+				}
+				if ( count( $breadcrumbs ) > 0 ) {
+					if ( !( $wluOptions['breadcrumbs-ignore-refreshes']  && ( strcmp( $breadcrumb, $breadcrumbs[( count( $breadcrumbs ) -1 )] ) === 0 ) ) &&
+				   	   !( $wluOptions['breadcrumbs-filter-duplicates'] && ( array_search( $breadcrumb, $breadcrumbs ) !== FALSE ) ) ) {
+						$breadcrumbs[] = $breadcrumb;
+					} else if ( $wluOptions['breadcrumbs-numberofcrumbs'] > $m_count || $wluOptions['breadcrumbs-numberofcrumbs'] > count( array_unique( $m_BreadCrumbs ) ) ) {
+						$max--;
+					}
+				} else {
+					$breadcrumbs[] = $breadcrumb;
 				}
 			}
-			$breadcrumbs = $breadcrumb . $breadcrumbs;
-			if ( $i < $max ) {
-				$breadcrumbs = ' ' . htmlspecialchars( $wluOptions['breadcrumbs-delimiter'] ) . ' ' . $breadcrumbs;
-			}
 		}
+
+		$breadcrumbString = $wluOptions['breadcrumbs-preceding-text'] . ' ' . implode( ' ' . htmlspecialchars( $wluOptions['breadcrumbs-delimiter'] ) . ' ', array_reverse( $breadcrumbs ) );
+
+		$container = "<div id='breadcrumbs' style='position:relative;height:10px;font-size:0.8em;top:-15px;'>$breadcrumbString</div>";
+
+		# And add our BreadCrumbs!
+		$wgOut -> prependHTML( $container );
+
+		# Finally, invalidate internal MediaWiki cache:
+		$wgUser -> invalidateCache();
+		# Must be done so that stale Breadcrumbs aren't cached into pages the user visits repeatedly.
+		# This makes this a risky extension to run on a wiki which relies heavily on caching.
+
 	}
-	$breadcrumbs = '<div id="breadcrumbs">' . htmlspecialchars( $wluOptions['breadcrumbs-preceding-text'] ) . ' ' . $breadcrumbs . '</div>';
-
-	# Set up that styling...
-	$wgOut -> addModuleStyles( 'ext.breadCrumbs' );
-
-	# And add our BreadCrumbs!
-	$wgOut -> prependHTML( $breadcrumbs );
-
-	# Finally, invalidate internal MediaWiki cache:
-	$wgUser -> invalidateCache();
-	# Must be done so that stale Breadcrumbs aren't cached into pages the user visits repeatedly.
-	# This makes this a risky extension to run on a wiki which relies heavily on caching.
 
 	# Return true to let the rest work.
 	return true;
@@ -135,6 +108,11 @@ function fnBreadCrumbsAddPreferences( $user, $defaultPreferences ) {
 			'type' => 'toggle',
 			'section' => 'rendering/breadcrumbs',
 			'label-message' => 'prefs-breadcrumbs-filter-duplicates' );
+
+		$defaultPreferences['breadcrumbs-ignore-refreshes'] = array(
+			'type' => 'toggle',
+			'section' => 'rendering/breadcrumbs',
+			'label-message' => 'prefs-breadcrumbs-ignore-refreshes' );
 
 		$defaultPreferences['breadcrumbs-numberofcrumbs'] = array(
 			'type' => 'int',
