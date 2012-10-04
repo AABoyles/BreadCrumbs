@@ -17,7 +17,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 function fnBreadCrumbsShowHook( $wgOut, $parseroutput ) {
 	global $wgUser, $wgDefaultUserOptions, $wgRequest;
-	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory, $wgBreadCrumbsLink, $wgBreadCrumbsIgnoreNameSpaces, $wgBreadCrumbsIgnorePages;
+	global $wgBreadCrumbsShowAnons, $wgBreadCrumbsIgnoreRefreshes, $wgBreadCrumbsRearrangeHistory, $wgBreadCrumbsLink, $wgBreadCrumbsIgnoreNameSpaces;
 
 	$wluOptions = $wgUser -> getOptions();
 
@@ -71,8 +71,7 @@ function fnBreadCrumbsShowHook( $wgOut, $parseroutput ) {
 	for ( $i = 1; $i <= $max; $i++ ) {
 		$j = count( $m_BreadCrumbs ) - $i;
 		$title = Title::newFromText( $m_BreadCrumbs[$j] );
-		if ( !in_array( $title -> getNsText(), $wgBreadCrumbsIgnoreNameSpaces ) &&
-			 !in_array( $title -> getText(),   $wgBreadCrumbsIgnorePages) ) {
+		if ( !in_array( $title -> getNsText(), $wgBreadCrumbsIgnoreNameSpaces ) ) {
 			if ( $wgBreadCrumbsLink ) {
 				# For whatever reason, the Linker doesn't play nice in Versions before 1.18.0...
 				if ( version_compare( SpecialVersion::getVersion(), '1.18.0' ) > -1 ) {
